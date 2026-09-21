@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Booking Snapshot — Your Name</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300..600;1,6..72,300..400&family=IBM+Plex+Sans:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --ground:  #E9EAE4;
+  --surface: #F4F5F0;
+  --ink:     #1A1D1C;
+  --muted:   #5F6461;
+  --rule:    #C7C9C0;
+  --accent:  #1E4FD8;
+
+  --measure: 34rem;
+  --page:    76rem;
+  --gutter:  clamp(1.25rem, 5vw, 4rem);
+
+  --serif: "Newsreader", Georgia, "Times New Roman", serif;
+  --sans:  "IBM Plex Sans", system-ui, -apple-system, sans-serif;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --ground: #15181A; --surface: #1D2124; --ink: #E8E9E3;
+    --muted: #969C97;  --rule: #343A3C;    --accent: #8FA9FF;
+  }
+}
+:root[data-theme="dark"] {
+  --ground: #15181A; --surface: #1D2124; --ink: #E8E9E3;
+  --muted: #969C97;  --rule: #343A3C;    --accent: #8FA9FF;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--ground);
+  color: var(--ink);
+  font-family: var(--serif);
+  font-size: 1.0625rem;
+  line-height: 1.65;
+  font-optical-sizing: auto;
+  -webkit-font-smoothing: antialiased;
+}
+
+img { max-width: 100%; display: block; border-radius: 2px; }
+a { color: var(--accent); text-underline-offset: 0.2em; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+.wrap { max-width: var(--page); margin-inline: auto; padding-inline: var(--gutter); }
+
+.masthead {
+  display: flex; justify-content: space-between; align-items: baseline;
+  gap: 1.5rem; padding-block: 1.75rem; font-family: var(--sans); font-size: 0.875rem;
+}
+.masthead__name { font-weight: 500; letter-spacing: -0.01em; color: var(--ink); text-decoration: none; }
+.masthead__nav { display: flex; gap: 1.5rem; }
+.masthead__nav a { color: var(--muted); text-decoration: none; }
+.masthead__nav a:hover { color: var(--ink); }
+
+.case-header { padding-block: clamp(3rem, 10vh, 6rem) clamp(2rem, 6vh, 3.5rem); }
+.case-header__eyebrow { font-family: var(--sans); font-size: 0.8125rem; color: var(--muted); margin: 0 0 1rem; }
+.case-header h1 {
+  font-size: clamp(2.25rem, 6vw, 3.5rem); line-height: 1.1; letter-spacing: -0.02em;
+  font-weight: 400; margin: 0 0 1rem; max-width: 22ch;
+}
+.case-header__sub { max-width: var(--measure); color: var(--muted); font-size: 1.125rem; margin: 0 0 2rem; }
+
+.meta-row {
+  display: flex; flex-wrap: wrap; gap: 0.5rem 2.5rem; font-family: var(--sans); font-size: 0.8125rem;
+  border-top: 1px solid var(--rule); padding-top: 1.5rem;
+}
+.meta-row dt { color: var(--muted); margin: 0; }
+.meta-row dd { margin: 0.15rem 0 0; font-weight: 500; }
+
+.cover { aspect-ratio: 16/9; border-radius: 2px; margin-top: 2.5rem; }
+
+.section { padding-block: clamp(2.5rem, 7vh, 4.5rem); border-top: 1px solid var(--rule); }
+.section__label { font-family: var(--sans); font-size: 0.8125rem; font-weight: 500; color: var(--muted); margin: 0 0 1.1rem; }
+.section h2 { font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 400; letter-spacing: -0.015em; margin: 0 0 1.25rem; max-width: 26ch; }
+.section p, .section ul { max-width: var(--measure); }
+.section p { margin: 0 0 1.15rem; }
+.section ul { padding-left: 1.1rem; margin: 0 0 1.15rem; }
+.section li { margin-bottom: 0.5rem; }
+
+.two-col { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.5rem; max-width: none; }
+.card { background: var(--surface); border-radius: 3px; padding: 1.5rem; }
+.card h3 { font-family: var(--sans); font-size: 0.9375rem; font-weight: 500; margin: 0 0 0.6rem; }
+.card p, .card ul { font-size: 0.9375rem; color: var(--muted); margin: 0; max-width: none; }
+.card ul { padding-left: 1.1rem; }
+.card li { margin-bottom: 0.4rem; }
+
+.figure { margin: 2rem 0; }
+.figure__cap { font-family: var(--sans); font-size: 0.8125rem; color: var(--muted); margin-top: 0.6rem; }
+
+.pull-quote {
+  max-width: var(--measure); font-family: var(--serif); font-style: italic; font-size: 1.25rem;
+  line-height: 1.5; color: var(--ink); border-left: 2px solid var(--accent); padding-left: 1.5rem; margin: 1.75rem 0;
+}
+
+.persona {
+  display: flex; align-items: center; gap: 1rem; background: var(--surface); border-radius: 3px;
+  padding: 1.25rem 1.5rem; max-width: var(--measure); margin: 1.5rem 0;
+}
+.persona__badge {
+  width: 3rem; height: 3rem; border-radius: 50%; flex-shrink: 0;
+  background: linear-gradient(140deg,#5B3E6B,#B9A0C9);
+}
+.persona__name { font-family: var(--sans); font-size: 0.9375rem; font-weight: 500; margin: 0; }
+.persona__desc { font-size: 0.875rem; color: var(--muted); margin: 0.2rem 0 0; }
+
+.next-project {
+  border-top: 1px solid var(--rule); padding-block: clamp(3rem, 8vh, 5rem);
+  display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 1rem;
+  text-decoration: none; color: inherit;
+}
+.next-project__label { font-family: var(--sans); font-size: 0.8125rem; color: var(--muted); }
+.next-project__title { font-size: clamp(1.5rem, 4vw, 2.25rem); font-weight: 400; margin: 0.4rem 0 0; }
+.next-project:hover .next-project__title { color: var(--accent); }
+
+.footer { border-top: 1px solid var(--rule); padding-block: 2.5rem 4rem; font-family: var(--sans); font-size: 0.875rem; color: var(--muted); }
+</style>
+</head>
+
+<body>
+
+<header class="wrap masthead">
+  <a class="masthead__name" href="index.html">Your Name</a>
+  <nav class="masthead__nav">
+    <a href="index.html#work">Work</a>
+    <a href="index.html#about">About</a>
+    <a href="mailto:you@example.com">Email</a>
+  </nav>
+</header>
+
+<main>
+
+  <section class="wrap case-header">
+    <p class="case-header__eyebrow">Case study</p>
+    <h1>Booking Snapshot</h1>
+    <p class="case-header__sub">
+      A streamlined way to view, access, and service bookings — replacing manual refreshing and
+      a "cryptic" command interface with a real-time, at-a-glance summary agents could act on
+      immediately.
+    </p>
+    <dl class="meta-row">
+      <div><dt>Role</dt><dd>Lead Designer</dd></div>
+      <div><dt>Product</dt><dd>Travelport, Smartpoint Cloud</dd></div>
+      <div><dt>Timeline</dt><dd>Ongoing</dd></div>
+    </dl>
+    <div class="cover" style="background: linear-gradient(140deg,#8A5B2E,#D9B27F);"></div>
+  </section>
+
+  <section class="wrap section">
+    <p class="section__label">The situation</p>
+    <h2>Agents couldn't see what was actually in the booking they had open</h2>
+    <p>
+      In the legacy system, updates to a booking file happened in the background — agents had to
+      manually refresh just to confirm a change had saved. The interface itself, often called the
+      "cryptic view," required learning software-specific language and keyboard shortcuts just to
+      navigate. Even as the graphical interface improved, one gap remained: agents still couldn't
+      easily see what booking they had open, what it contained, what had changed, or what was
+      still outstanding.
+    </p>
+    <p>
+      When we moved users onto our new platform, that gap became impossible to ignore. We needed a
+      tool that kept the automation benefits agents relied on, without carrying forward the
+      confusion that had always surrounded it.
+    </p>
+  </section>
+
+  <section class="wrap section">
+    <p class="section__label">Who this was for</p>
+    <h2>Built for novice agents, useful to everyone</h2>
+    <div class="persona">
+      <div class="persona__badge"></div>
+      <div>
+        <p class="persona__name">Nicole, the novice</p>
+        <p class="persona__desc">One of Smartpoint's core personas — new to the system, unfamiliar with its legacy command language, needing to service complex bookings without months of training first.</p>
+      </div>
+    </div>
+    <p>
+      Snapshot's primary goal was letting novice agents access and service complex bookings
+      without learning the system's cryptic language first. But it also had a secondary job:
+      giving veteran agents faster access to the areas they used constantly, and providing a much
+      better entry point into Smartpoint's core search functions.
+    </p>
+  </section>
+
+  <section class="wrap section">
+    <p class="section__label">Discovery</p>
+    <h2>Research and journey mapping shaped the MVP</h2>
+    <p>
+      The need for Snapshot first surfaced through user feedback during the shift to a more
+      graphically focused interface — agents kept losing track of what booking they had open or
+      what it actually contained. I ran remote moderated interviews using a high-fidelity prototype
+      as the visual aid: four sessions, roughly 60 minutes each, with participants suggested by
+      their account managers.
+    </p>
+    <p>
+      Feedback on the initial concept was positive — participants specifically valued visibility
+      into ticketing alerts and dates, quick access to seat status, and traveler details like
+      security documents. They also suggested useful extensions: the ability to log a reason
+      directly against an alert as a timestamped note, custom alerts for agency-specific reminders,
+      and one-click searches that reused data already in the booking file.
+    </p>
+    <p>
+      Alongside that, I ran an agent journey-mapping exercise with product managers and product
+      owners to plan the path toward a minimum marketable product. That exercise narrowed the MVP
+      down to four core issues: easier access to search functions, a clear overview and summary of
+      the current booking, system and custom alerts, and quick access to commonly needed extras
+      like seats, bags, and upgrades.
+    </p>
+  </section>
+
+  <section class="wrap section">
+    <p class="section__label">The solution</p>
+    <h2>A persistent summary, available from anywhere in the app</h2>
+    <p>
+      Snapshot surfaces the most important details of a booking file the moment an agent retrieves
+      it — the number of bookings and travelers, file and booking statuses, real-time alerts, and
+      direct links into the areas of the file agents use most.
+    </p>
+    <div class="two-col">
+      <div class="card">
+        <h3>Instant overview</h3>
+        <p>The most relevant booking details, visible without navigating through complex menus.</p>
+      </div>
+      <div class="card">
+        <h3>Real-time updates</h3>
+        <p>Live status, removing the need for the manual refresh cycle agents relied on before.</p>
+      </div>
+      <div class="card">
+        <h3>Quick access to key areas</h3>
+        <p>Direct links to frequently used sections, cutting time spent hunting through the file.</p>
+      </div>
+      <div class="card">
+        <h3>Easier access to upsell</h3>
+        <p>Direct links to seats, bags, upgrades, and trip insurance — surfaced at the natural moment, not buried.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap section">
+    <p class="section__label">Design detail</p>
+    <h2>Header, badge, and summary menus</h2>
+    <p>
+      The design centers on a persistent header with tabs into each core search type — flights,
+      hotels, cars — pinned across the app so agents never lose access to it. An info badge on the
+      header reveals a summary of what's already in the open booking file, and it's also where
+      alerts surface. Clicking or hovering the badge opens the summary menus themselves, giving
+      agents the most important booking details from wherever they are in the workflow.
+    </p>
+    <p>
+      Between the first prototype test and this design, the platform underwent a full rebrand of
+      its Atlas design system — meaning Snapshot's visual layer had to be rebuilt to match, on top
+      of the interaction design work already underway.
+    </p>
+    <p>
+      Alerts became a bigger part of the design than originally planned. The first prototype only
+      surfaced system-detected alerts — a flight issue, for instance, that an agent could click
+      into and resolve directly. Based on research feedback, I added user-defined alerts too:
+      agents can set their own triggers, like a reminder to offer parking add-ons once a booking
+      reaches a certain stage.
+    </p>
+  </section>
+
+  <section class="wrap section">
+    <p class="section__label">Further testing</p>
+    <h2>A live prototype demo, tested with over 50 users</h2>
+    <p>
+      Beyond the initial four-session study, I ran a live Figma prototype demo with internal
+      customers and customer account managers — over 50 users in total. The goal was validating
+      the new navigation model directly: was access to search panels intuitive, was quick access to
+      reservation summaries actually useful, and what content mattered most when agents looked at a
+      summary.
+    </p>
+    <p>Feedback from that round shaped several concrete changes:</p>
+    <ul>
+      <li>Adding control over alert frequency, rather than a single fixed behavior</li>
+      <li>Surfacing information on hover instead of requiring a click, for faster access</li>
+      <li>Ensuring every segment type displayed a clear status, not just some</li>
+      <li>Renaming a seats-only button to cover ancillaries more broadly, since agents needed access to more than just seats</li>
+      <li>Only showing tabs when there was actual content behind them</li>
+    </ul>
+    <div class="pull-quote">
+      Users appreciated the customizable alerts, but wanted more control over how often they fired — not louder, just smarter.
+    </div>
+  </section>
+
+  <section class="wrap section">
+    <p class="section__label">Outcome</p>
+    <h2>Early signal is strong; the tool is still growing</h2>
+    <p>
+      Snapshot has only been live for a short period, but early feedback has been consistently
+      positive. Agents report clearer visibility and less time spent navigating to find basic
+      information. Placing upsell options directly inside Snapshot's summary menus drove a real
+      increase in seat selections and trip insurance uptake — turning a visibility feature into a
+      genuine revenue lever without it feeling like an upsell push.
+    </p>
+    <p>
+      The clearest sign of product-market fit inside the company itself: multiple teams have
+      already asked to expand Snapshot's functionality further, beyond what shipped in this first
+      version.
+    </p>
+  </section>
+
+  <section class="wrap section">
+    <p class="section__label">Reflection</p>
+    <h2>What went well, and what I'd change</h2>
+    <p>
+      Involving users from early on gave the project a much stronger starting point and removed a
+      lot of the trial-and-error that usually eats the first few iterations of a tool like this.
+      Continuous feedback at each stage of testing let us solve problems before they became real
+      issues in production.
+    </p>
+    <p>
+      The honest miss: the time between the initial concept and actually shipping Snapshot was too
+      long. Looking back, I'd push harder to build and test in smaller increments, rather than
+      letting the gap between "we know the idea works" and "it's in front of real agents" stretch
+      as far as it did.
+    </p>
+  </section>
+
+  <section class="wrap section">
+    <p class="section__label">Next steps</p>
+    <h2>Where Snapshot goes from here</h2>
+    <ul>
+      <li><strong>Frequent flyer and loyalty details.</strong> Surfacing relevant loyalty information directly in the summary, where agents already look for it.</li>
+      <li><strong>Deeper accessibility and keyboard support.</strong> Improving keyboard navigation across the summary menus for agents who rely on it.</li>
+      <li><strong>Smart searches using existing booking data.</strong> If a traveler already has a flight landing in a city on a given date, offering a one-click search for a hotel or car using that data automatically, rather than making agents re-enter it.</li>
+    </ul>
+  </section>
+
+  <a class="wrap next-project" href="fast-track-campaigns.html">
+    <div>
+      <p class="next-project__label">Next project</p>
+      <p class="next-project__title">Fast Track Campaigns</p>
+    </div>
+    <span>→</span>
+  </a>
+
+</main>
+
+<footer class="footer wrap">
+  <a href="mailto:you@example.com">you@example.com</a>
+</footer>
+
+</body>
+</html>

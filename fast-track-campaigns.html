@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fast Track Campaigns — Your Name</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300..600;1,6..72,300..400&family=IBM+Plex+Sans:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --ground:  #E9EAE4;
+  --surface: #F4F5F0;
+  --ink:     #1A1D1C;
+  --muted:   #5F6461;
+  --rule:    #C7C9C0;
+  --accent:  #1E4FD8;
+
+  --measure: 34rem;
+  --page:    76rem;
+  --gutter:  clamp(1.25rem, 5vw, 4rem);
+
+  --serif: "Newsreader", Georgia, "Times New Roman", serif;
+  --sans:  "IBM Plex Sans", system-ui, -apple-system, sans-serif;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --ground: #15181A; --surface: #1D2124; --ink: #E8E9E3;
+    --muted: #969C97;  --rule: #343A3C;    --accent: #8FA9FF;
+  }
+}
+:root[data-theme="dark"] {
+  --ground: #15181A; --surface: #1D2124; --ink: #E8E9E3;
+  --muted: #969C97;  --rule: #343A3C;    --accent: #8FA9FF;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--ground);
+  color: var(--ink);
+  font-family: var(--serif);
+  font-size: 1.0625rem;
+  line-height: 1.65;
+  font-optical-sizing: auto;
+  -webkit-font-smoothing: antialiased;
+}
+
+img { max-width: 100%; display: block; border-radius: 2px; }
+a { color: var(--accent); text-underline-offset: 0.2em; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+.wrap { max-width: var(--page); margin-inline: auto; padding-inline: var(--gutter); }
+
+.masthead {
+  display: flex; justify-content: space-between; align-items: baseline;
+  gap: 1.5rem; padding-block: 1.75rem; font-family: var(--sans); font-size: 0.875rem;
+}
+.masthead__name { font-weight: 500; letter-spacing: -0.01em; color: var(--ink); text-decoration: none; }
+.masthead__nav { display: flex; gap: 1.5rem; }
+.masthead__nav a { color: var(--muted); text-decoration: none; }
+.masthead__nav a:hover { color: var(--ink); }
+
+.case-header { padding-block: clamp(3rem, 10vh, 6rem) clamp(2rem, 6vh, 3.5rem); }
+.case-header__eyebrow { font-family: var(--sans); font-size: 0.8125rem; color: var(--muted); margin: 0 0 1rem; }
+.case-header h1 {
+  font-size: clamp(2.25rem, 6vw, 3.5rem); line-height: 1.1; letter-spacing: -0.02em;
+  font-weight: 400; margin: 0 0 1rem; max-width: 22ch;
+}
+.case-header__sub { max-width: var(--measure); color: var(--muted); font-size: 1.125rem; margin: 0 0 2rem; }
+
+.meta-row {
+  display: flex; flex-wrap: wrap; gap: 0.5rem 2.5rem; font-family: var(--sans); font-size: 0.8125rem;
+  border-top: 1px solid var(--rule); padding-top: 1.5rem;
+}
+.meta-row dt { color: var(--muted); margin: 0; }
+.meta-row dd { margin: 0.15rem 0 0; font-weight: 500; }
+
+.cover { aspect-ratio: 16/9; border-radius: 2px; margin-top: 2.5rem; }
+
+/* Stat band */
+.stats {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  border-block: 1px solid var(--rule); margin-block: clamp(2rem, 5vh, 3.5rem);
+}
+.stat { padding: 1.25rem 1.5rem 1.4rem; border-left: 1px solid var(--rule); }
+.stat:first-child { border-left: 0; padding-left: 0; }
+.stat-n {
+  font-family: var(--sans); font-weight: 500; font-size: clamp(1.8rem, 4vw, 2.4rem);
+  line-height: 1; letter-spacing: -0.02em; color: var(--ink);
+}
+.stat-l { margin-top: 0.5rem; font-size: 0.875rem; line-height: 1.4; color: var(--muted); }
+@media (max-width: 700px) {
+  .stat { border-left: 0; border-top: 1px solid var(--rule); padding-left: 0; }
+  .stat:first-child { border-top: 0; }
+}
+
+.section { padding-block: clamp(2.5rem, 7vh, 4.5rem); border-top: 1px solid var(--rule); }
+.section__label { font-family: var(--sans); font-size: 0.8125rem; font-weight: 500; color: var(--muted); margin: 0 0 1.1rem; }
+.section h2 { font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 400; letter-spacing: -0.015em; margin: 0 0 1.25rem; max-width: 26ch; }
+.section p, .section ul { max-width: var(--measure); }
+.section p { margin: 0 0 1.15rem; }
+.section ul { padding-left: 1.1rem; margin: 0 0 1.15rem; }
+.section li { margin-bottom: 0.5rem; }
+
+.decision {
+  background: var(--surface); border-radius: 3px; padding: 1.5rem 1.75rem;
+  margin-bottom: 1rem; max-width: var(--measure);
+}
+.decision h4 { font-family: var(--sans); font-size: 0.9375rem; font-weight: 500; margin: 0 0 0.5rem; }
+.decision p { font-size: 0.9375rem; color: var(--muted); margin: 0 0 0.6rem; max-width: none; }
+.decision p:last-child { margin-bottom: 0; }
+
+.two-col { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.5rem; max-width: none; }
+.card { background: var(--surface); border-radius: 3px; padding: 1.5rem; }
+.card h3 { font-family: var(--sans); font-size: 0.9375rem; font-weight: 500; margin: 0 0 0.6rem; }
+.card p, .card ul { font-size: 0.9375rem; color: var(--muted); margin: 0; max-width: none; }
+.card ul { padding-left: 1.1rem; }
+.card li { margin-bottom: 0.4rem; }
+
+.pull-quote {
+  max-width: var(--measure); font-family: var(--serif); font-style: italic; font-size: 1.25rem;
+  line-height: 1.5; color: var(--ink); border-left: 2px solid var(--accent); padding-left: 1.5rem; margin: 1.75rem 0;
+}
+
+.figure { margin: 2rem 0; }
+.figure__cap { font-family: var(--sans); font-size: 0.8125rem; color: var(--muted); margin-top: 0.6rem; }
+
+.next-project {
+  border-top: 1px solid var(--rule); padding-block: clamp(3rem, 8vh, 5rem);
+  display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 1rem;
+  text-decoration: none; color: inherit;
+}
+.next-project__label { font-family: var(--sans); font-size: 0.8125rem; color: var(--muted); }
+.next-project__title { font-size: clamp(1.5rem, 4vw, 2.25rem); font-weight: 400; margin: 0.4rem 0 0; }
+.next-project:hover .next-project__title { color: var(--accent); }
+
+.footer { border-top: 1px solid var(--rule); padding-block: 2.5rem 4rem; font-family: var(--sans); font-size: 0.875rem; color: var(--muted); }
+
+.note {
+  font-family: var(--sans); font-size: 0.8125rem; color: var(--muted);
+  border-top: 1px solid var(--rule); padding-top: 1rem; margin-top: 2rem; max-width: var(--measure);
+}
+</style>
+</head>
+
+<body>
+
+<header class="wrap masthead">
+  <a class="masthead__name" href="index.html">Your Name</a>
+  <nav class="masthead__nav">
+    <a href="index.html#work">Work</a>
+    <a href="index.html#about">About</a>
+    <a href="mailto:you@example.com">Email</a>
+  </nav>
+</header>
+
+<main>
+
+  <section class="wrap case-header">
+    <p class="case-header__eyebrow">Case study</p>
+    <h1>Fast Track Campaigns</h1>
+    <p class="case-header__sub">
+      Making campaign creation fast, clear, and accessible for smaller brands and marketplace
+      sellers — cutting median launch time from 35 minutes to 5, without a full platform rebuild.
+    </p>
+    <dl class="meta-row">
+      <div><dt>Role</dt><dd>UX Lead, discovery through rollout</dd></div>
+      <div><dt>Team</dt><dd>Product, Engineering, Commercial, GTM</dd></div>
+      <div><dt>Status</dt><dd>Shipped, early rollout</dd></div>
+    </dl>
+    <div class="cover" style="background: linear-gradient(140deg,#1E4FD8,#F5A623);"></div>
+  </section>
+
+  <section class="wrap section">
+    <p class="section__label">The goal</p>
+    <h2>Help more advertisers launch a valid campaign confidently</h2>
+    <p>
+      Without needing to understand the platform's full campaign and line-item architecture. I led
+      UX from discovery through rollout: defining the activation problem, simplifying the campaign
+      model, designing the guided flow, and iterating with product, engineering, commercial, and
+      retailer feedback.
+    </p>
+    <p>The previous experience optimized for expert control. Fast Track optimized for confident activation:</p>
+    <ul>
+      <li>From campaign-plus-line-item complexity to one flat campaign configuration</li>
+      <li>From 30+ setup decisions to a short guided path</li>
+      <li>From support-led setup to self-serve activation</li>
+      <li>From technical bidding inputs to clearer business goals</li>
+      <li>From one workflow for everyone to a choice between Fast Track and Advanced Setup</li>
+    </ul>
+  </section>
+
+  <section class="wrap">
+    <div class="stats">
+      <div class="stat"><p class="stat-n">5 min</p><p class="stat-l">Median launch time in the tracked beta, down from ~35 minutes previously.</p></div>
+      <div class="stat"><p class="stat-n">100%</p><p class="stat-l">Completion rate in the tracked beta flow.</p></div>
+      <div class="stat"><p class="stat-n">240+</p><p class="stat-l">Advertisers launched via Fast Track in early rollout, with several hundred campaigns created.</p></div>
+      <div class="stat"><p class="stat-n">12.6 vs 6.6</p><p class="stat-l">Lifetime ROAS for Fast Track versus the advanced flow in the same early snapshot — directional evidence simplification didn't cost campaign quality.</p></div>
+    </div>
+  </section>
+
+  <section class="wrap section">
+    <p class="section__label">The problem</p>
+    <h2>Users weren't struggling because they lacked options</h2>
+    <p>They were struggling because there were too many of them. The existing flow required users to reason across campaigns and line items, multiple budget levels and types, dates, pacing, bidding, and targeting — technical settings that were hard to connect to any actual business outcome.</p>
+    <p>For less experienced advertisers, that meant long setup times, high cognitive load and low confidence, configuration mistakes (especially around budgets and schedules), dependence on support teams for basic tasks, and drop-off before campaigns ever went live.</p>
+    <p>Retailers wanted to grow their long-tail advertiser base, but the workflow made activation expensive to scale — more support effort, inconsistent campaign quality, underspend, and advertiser churn. The opportunity wasn't to replace the advanced experience. It was to build a simpler path for advertisers who weren't launching campaigns at all.</p>
+  </section>
+
+  <section class="wrap section">
+    <p class="section__label">Discovery insight</p>
+    <h2>The problem was a mismatch in mental models</h2>
+    <p>
+      Research and cross-functional workshops showed the core problem wasn't missing
+      functionality — it was a mismatch between the product's internal structure and how users
+      actually thought. Long-tail advertisers thought in terms of what they wanted to achieve,
+      which products to promote, how much to spend, and when to run. They didn't naturally think in
+      terms of campaigns, line items, budget inheritance, or optimization settings.
+    </p>
+    <p>That insight drove the decision to keep the new flow flat and focused, rather than a lighter version of the existing structure.</p>
+  </section>
+
+  <section class="wrap section">
+    <p class="section__label">The solution</p>
+    <h2>Six decisions that shaped the flow</h2>
+    <div class="decision">
+      <h4>Let users choose the right level of complexity</h4>
+      <p>At the start of setup, users choose between Fast Track (guided, recommended defaults) and Advanced Setup (full control for complex, multi-line-item strategies). This made Fast Track a complementary path, not a restricted version of the main product.</p>
+    </div>
+    <div class="decision">
+      <h4>Flatten the campaign model</h4>
+      <p>Fast Track uses one campaign, one line item — removing the need to understand where settings belonged, and preventing common conflicts between campaign-level and line-item-level budgets, dates, and schedules. The new mental model: configure one campaign, review it, launch it.</p>
+    </div>
+    <div class="decision">
+      <h4>Guide users through the decisions that matter</h4>
+      <p>Goal, schedule and budget, products and bid guidance, balance, review and launch. Daily and Total budget replaced nested budget logic. Product selection supported search, category filtering, and pasting in bulk product IDs, with in-flow recommendations to help users select enough relevant products for delivery and learning.</p>
+    </div>
+    <div class="decision">
+      <h4>Automate unnecessary configuration</h4>
+      <p>Keyword targeting, retailer-controlled conquesting, attribution defaults, and recommended bidding and pacing were automated or preselected. The principle wasn't "hide everything" — it was removing unnecessary decisions while keeping important system behavior understandable.</p>
+    </div>
+    <div class="decision">
+      <h4>Build confidence before launch</h4>
+      <p>A final review screen brought the whole setup together — name, goal and bid strategy, dates and budget, products, balance — editable directly before launching. Retailer feedback specifically called out this summary as something worth protecting through every later iteration.</p>
+    </div>
+    <div class="decision">
+      <h4>Make Fast Track visible after launch</h4>
+      <p>A distinct icon marks Fast Track campaigns in the campaign list, so advertisers recognize the mode they're in, retailers can monitor adoption, and product teams can compare Fast Track against Advanced campaigns.</p>
+    </div>
+  </section>
+
+  <section class="wrap section">
+    <p class="section__label">Key UX decisions, in more detail</p>
+    <h2>Where the real tradeoffs lived</h2>
+    <div class="two-col">
+      <div class="card">
+        <h3>Budget simplification</h3>
+        <p>The old flow exposed many budget combinations across campaign and line-item levels. Fast Track reduced the initial choice to Daily or Total at the campaign level, cutting the risk of contradictory settings or underfunded campaigns.</p>
+      </div>
+      <div class="card">
+        <h3>Balance selection in context</h3>
+        <p>Balance mapping moved directly into the campaign flow. Eligible balances are filtered and shown exactly when needed, eliminating a detour through billing and surfacing launch dependencies earlier.</p>
+      </div>
+      <div class="card">
+        <h3>Goal and bidding clarity</h3>
+        <p>Retailer feedback showed fully automated bidding could feel misaligned with strict ROAS goals. The goal step evolved into two clearer options — automated pacing and optimization, or more direct bid control — connecting the interface to how advertisers actually describe success.</p>
+      </div>
+      <div class="card">
+        <h3>Product selection guidance</h3>
+        <p>Search by name or SKU, paste product IDs in bulk, or select by category. The flow recommends at least 10 relevant products, turning a hidden performance best practice into an actionable setup decision.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap section">
+    <p class="section__label">Method</p>
+    <h2>An AI-native design process</h2>
+    <p>
+      Most of the ideation, prototyping, and early front-end implementation on this project was
+      done in close collaboration with AI tools rather than the traditional design-then-handoff
+      model. I used Claude to explore flow directions early, build working prototypes fast enough
+      to test real interaction patterns rather than static mockups, and generate front-end code for
+      review and refinement by the engineering team through our normal code-review process.
+    </p>
+    <p>
+      That shifted where my time went. Less of it sat in producing polished static screens, more of
+      it sat in framing the problem clearly enough for the tooling to be useful, and in judging
+      which generated directions were actually right for the user versus merely plausible. The
+      review and iteration loop with engineering stayed exactly as rigorous as it would be for any
+      other change — the acceleration was in getting to a testable version of an idea, not in
+      skipping scrutiny of it.
+    </p>
+  </section>
+
+  <section class="wrap section">
+    <p class="section__label">Iteration through beta</p>
+    <h2>What the beta actually changed</h2>
+    <p>The beta combined product analytics with feedback from advertisers, retailers, commercial, and operations teams. The most important refinements:</p>
+    <ul>
+      <li>Made the selected bidding strategy more explicit on screen</li>
+      <li>Explained clearly that the single-line-item structure was intentional, not a limitation</li>
+      <li>Surfaced the calculated daily budget for Total budget selections</li>
+      <li>Preserved the optional end date and the review-screen experience users had specifically praised</li>
+      <li>Closed post-launch control gaps — negative keywords, budget overrides, duplication, monthly budgets</li>
+    </ul>
+    <div class="pull-quote">
+      Users will choose simplicity at launch, but they'll keep using it only if they can optimize and adapt later.
+    </div>
+  </section>
+
+  <section class="wrap section">
+    <p class="section__label">Impact</p>
+    <h2>What changed for users, and for the business</h2>
+    <div class="two-col">
+      <div class="card">
+        <h3>User impact</h3>
+        <ul>
+          <li>A dramatically shorter path to a live campaign</li>
+          <li>Fewer choices to interpret at each step</li>
+          <li>More guidance at the actual moment of decision</li>
+          <li>A clearer connection between goals, budgets, products, and performance</li>
+          <li>A visible, editable summary before launch</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Business impact</h3>
+        <ul>
+          <li>A scalable activation mechanism for advertisers previously blocked by complexity</li>
+          <li>Positive early repeat-launch and retention signals</li>
+          <li>Lower setup friction and support dependency</li>
+          <li>A foundation for extending the model to further programs</li>
+        </ul>
+      </div>
+    </div>
+    <p>
+      The qualitative signal mattered as much as the numbers: support conversations shifted away
+      from basic workflow questions and toward campaign strategy and objectives — the kind of
+      conversation retailers actually wanted to be having.
+    </p>
+  </section>
+
+  <section class="wrap section">
+    <p class="section__label">Reflection</p>
+    <h2>Simplification is not a visual redesign</h2>
+    <p>
+      Fast Track only worked because of alignment between three things that don't usually get
+      solved together: the user's actual mental model, the product's underlying campaign
+      architecture, and the business goal of scalable activation. Making the first launch easier,
+      without removing the Advanced Setup path for people who needed it, improved the experience
+      for new advertisers while creating a stronger growth mechanism for the business.
+    </p>
+  </section>
+
+  <a class="wrap next-project" href="cmax-expansion.html">
+    <div>
+      <p class="next-project__label">Next project</p>
+      <p class="next-project__title">CMax Expansion</p>
+    </div>
+    <span>→</span>
+  </a>
+
+</main>
+
+<footer class="footer wrap">
+  <a href="mailto:you@example.com">you@example.com</a>
+</footer>
+
+</body>
+</html>

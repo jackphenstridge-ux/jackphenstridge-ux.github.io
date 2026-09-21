@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CMax Expansion — Your Name</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300..600;1,6..72,300..400&family=IBM+Plex+Sans:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+/* Same token set as index.html and cloud-scripts.html — keep all three in sync */
+:root {
+  --ground:  #E9EAE4;
+  --surface: #F4F5F0;
+  --ink:     #1A1D1C;
+  --muted:   #5F6461;
+  --rule:    #C7C9C0;
+  --accent:  #1E4FD8;
+
+  --measure: 34rem;
+  --page:    76rem;
+  --gutter:  clamp(1.25rem, 5vw, 4rem);
+
+  --serif: "Newsreader", Georgia, "Times New Roman", serif;
+  --sans:  "IBM Plex Sans", system-ui, -apple-system, sans-serif;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --ground: #15181A; --surface: #1D2124; --ink: #E8E9E3;
+    --muted: #969C97;  --rule: #343A3C;    --accent: #8FA9FF;
+  }
+}
+:root[data-theme="dark"] {
+  --ground: #15181A; --surface: #1D2124; --ink: #E8E9E3;
+  --muted: #969C97;  --rule: #343A3C;    --accent: #8FA9FF;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--ground);
+  color: var(--ink);
+  font-family: var(--serif);
+  font-size: 1.0625rem;
+  line-height: 1.65;
+  font-optical-sizing: auto;
+  -webkit-font-smoothing: antialiased;
+}
+
+img { max-width: 100%; display: block; border-radius: 2px; }
+a { color: var(--accent); text-underline-offset: 0.2em; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+.wrap {
+  max-width: var(--page);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+.masthead {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1.5rem;
+  padding-block: 1.75rem;
+  font-family: var(--sans);
+  font-size: 0.875rem;
+}
+.masthead__name { font-weight: 500; letter-spacing: -0.01em; color: var(--ink); text-decoration: none; }
+.masthead__nav { display: flex; gap: 1.5rem; }
+.masthead__nav a { color: var(--muted); text-decoration: none; }
+.masthead__nav a:hover { color: var(--ink); }
+
+.case-header { padding-block: clamp(3rem, 10vh, 6rem) clamp(2rem, 6vh, 3.5rem); }
+.case-header__eyebrow { font-family: var(--sans); font-size: 0.8125rem; color: var(--muted); margin: 0 0 1rem; }
+.case-header h1 {
+  font-size: clamp(2.25rem, 6vw, 3.5rem);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  font-weight: 400;
+  margin: 0 0 1rem;
+  max-width: 24ch;
+}
+.case-header__sub { max-width: var(--measure); color: var(--muted); font-size: 1.125rem; margin: 0 0 2rem; }
+
+.meta-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 2.5rem;
+  font-family: var(--sans);
+  font-size: 0.8125rem;
+  border-top: 1px solid var(--rule);
+  padding-top: 1.5rem;
+}
+.meta-row dt { color: var(--muted); margin: 0; }
+.meta-row dd { margin: 0.15rem 0 0; font-weight: 500; }
+
+.cover { aspect-ratio: 16/9; border-radius: 2px; margin-top: 2.5rem; }
+
+/* Frame stat — the one number that matters, stated plainly up top */
+.frame-stat {
+  max-width: var(--measure);
+  font-size: 1.25rem;
+  line-height: 1.55;
+  margin: 2rem 0 0;
+}
+.frame-stat strong { color: var(--accent); }
+
+/* In-page contents list for the three sub-studies */
+.toc { border-top: 1px solid var(--rule); padding-block: clamp(2.5rem, 7vh, 4rem); }
+.toc__label { font-family: var(--sans); font-size: 0.8125rem; font-weight: 500; color: var(--muted); margin: 0 0 1.25rem; }
+.toc__list { border-top: 1px solid var(--rule); }
+.toc__item {
+  display: block;
+  padding-block: 1.4rem;
+  border-bottom: 1px solid var(--rule);
+  text-decoration: none;
+  color: inherit;
+}
+.toc__item:hover { color: var(--accent); }
+.toc__num { font-family: var(--sans); font-size: 0.8125rem; color: var(--muted); }
+.toc__title { font-size: clamp(1.2rem, 2.6vw, 1.6rem); font-weight: 400; margin: 0.3rem 0 0.3rem; }
+.toc__note { font-family: var(--sans); font-size: 0.875rem; color: var(--muted); max-width: var(--measure); margin: 0; }
+
+/* Sub-study blocks */
+.study { padding-block: clamp(3rem, 8vh, 5rem); border-top: 1px solid var(--rule); }
+.study__kicker { font-family: var(--sans); font-size: 0.8125rem; color: var(--muted); margin: 0 0 0.75rem; }
+.study h2 { font-size: clamp(1.75rem, 4vw, 2.5rem); font-weight: 400; letter-spacing: -0.02em; margin: 0 0 1rem; max-width: 20ch; }
+.study__dek { max-width: var(--measure); color: var(--muted); font-size: 1.0625rem; margin: 0 0 2rem; }
+
+.section { padding-block: clamp(2rem, 5vh, 3rem); }
+.section__label { font-family: var(--sans); font-size: 0.8125rem; font-weight: 500; color: var(--muted); margin: 0 0 1.1rem; }
+.section h3 { font-size: clamp(1.25rem, 2.4vw, 1.5rem); font-weight: 400; letter-spacing: -0.01em; margin: 0 0 1rem; max-width: 28ch; }
+.section p, .section ul { max-width: var(--measure); }
+.section p { margin: 0 0 1.1rem; }
+.section ul { padding-left: 1.1rem; margin: 0 0 1.1rem; }
+.section li { margin-bottom: 0.5rem; }
+
+.decision {
+  background: var(--surface);
+  border-radius: 3px;
+  padding: 1.5rem 1.75rem;
+  margin-bottom: 1rem;
+  max-width: var(--measure);
+}
+.decision h4 { font-family: var(--sans); font-size: 0.9375rem; font-weight: 500; margin: 0 0 0.5rem; }
+.decision p { font-size: 0.9375rem; color: var(--muted); margin: 0; max-width: none; }
+
+.figure { margin: 2rem 0; }
+.figure__cap { font-family: var(--sans); font-size: 0.8125rem; color: var(--muted); margin-top: 0.6rem; }
+
+.numbered-flow {
+  counter-reset: flow;
+  list-style: none;
+  padding: 0;
+  max-width: var(--measure);
+}
+.numbered-flow li {
+  counter-increment: flow;
+  position: relative;
+  padding-left: 2.25rem;
+  margin-bottom: 1rem;
+}
+.numbered-flow li::before {
+  content: counter(flow);
+  position: absolute;
+  left: 0;
+  top: 0;
+  font-family: var(--sans);
+  font-size: 0.8125rem;
+  color: var(--accent);
+  border: 1px solid var(--rule);
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pull-quote {
+  max-width: var(--measure);
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 1.25rem;
+  line-height: 1.5;
+  color: var(--ink);
+  border-left: 2px solid var(--accent);
+  padding-left: 1.5rem;
+  margin: 1.75rem 0;
+}
+
+.next-project {
+  border-top: 1px solid var(--rule);
+  padding-block: clamp(3rem, 8vh, 5rem);
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 1rem;
+  text-decoration: none;
+  color: inherit;
+}
+.next-project__label { font-family: var(--sans); font-size: 0.8125rem; color: var(--muted); }
+.next-project__title { font-size: clamp(1.5rem, 4vw, 2.25rem); font-weight: 400; margin: 0.4rem 0 0; }
+.next-project:hover .next-project__title { color: var(--accent); }
+
+.footer { border-top: 1px solid var(--rule); padding-block: 2.5rem 4rem; font-family: var(--sans); font-size: 0.875rem; color: var(--muted); }
+
+.note {
+  font-family: var(--sans);
+  font-size: 0.8125rem;
+  color: var(--muted);
+  border-top: 1px solid var(--rule);
+  padding-top: 1rem;
+  margin-top: 2rem;
+  max-width: var(--measure);
+}
+</style>
+</head>
+
+<body>
+
+<header class="wrap masthead">
+  <a class="masthead__name" href="index.html">Your Name</a>
+  <nav class="masthead__nav">
+    <a href="index.html#work">Work</a>
+    <a href="index.html#about">About</a>
+    <a href="mailto:you@example.com">Email</a>
+  </nav>
+</header>
+
+<main>
+
+  <section class="wrap case-header">
+    <p class="case-header__eyebrow">Case study · Program of three connected initiatives</p>
+    <h1>CMax Expansion</h1>
+    <p class="case-header__sub">
+      Making fragmented retail media feel like one system — told through three connected
+      initiatives: visibility and trust, governance and activation, and cross-product
+      interoperability.
+    </p>
+    <dl class="meta-row">
+      <div><dt>Role</dt><dd>UX Owner, CMax Expansion</dd></div>
+      <div><dt>Team</dt><dd>Product, Engineering, Commercial, Retailer Partnerships</dd></div>
+      <div><dt>Timeline</dt><dd>2025–2026</dd></div>
+    </dl>
+    <div class="cover" style="background: linear-gradient(140deg,#1E4FD8,#7FA0E0);"></div>
+    <p class="frame-stat">
+      Roughly <strong>70% of retail media spend</strong> flowed through retailer-sold channels
+      that were largely invisible in the product — brands were reconstructing performance by
+      hand across separate retailer platforms. This program existed to close that gap.
+    </p>
+  </section>
+
+  <section class="wrap section">
+    <p class="section__label">The program in one sentence</p>
+    <p style="max-width:var(--measure); font-size:1.0625rem;">
+      CMax Expansion wasn't a single feature — it was a coordinated set of experiences that had
+      to make fragmented retail media workflows feel coherent, while preserving retailer control,
+      account permissions, existing operating models, and commercial requirements. My role spanned
+      all three initiatives: translating commercial, technical, and retailer constraints into
+      usable workflows, and creating shared interaction patterns for account linking, access
+      states, and campaign context across the program.
+    </p>
+  </section>
+
+  <section class="wrap toc">
+    <p class="toc__label">Three initiatives, one system</p>
+    <div class="toc__list">
+      <a class="toc__item" href="#unified-insights">
+        <span class="toc__num">01 — Visibility &amp; trust</span>
+        <p class="toc__title">Unified Insights</p>
+        <p class="toc__note">Designing the consent-first account-linking model and terminology system that made connected campaign data trustworthy.</p>
+      </a>
+      <a class="toc__item" href="#authorized-buyers">
+        <span class="toc__num">02 — Governance &amp; activation</span>
+        <p class="toc__title">Authorized Buyers + Retailer Budget</p>
+        <p class="toc__note">Connecting retailer approval, buyer permissions, balances, and campaign creation into one understandable activation path.</p>
+      </a>
+      <a class="toc__item" href="#retailer-enablement">
+        <span class="toc__num">03 — Interoperability</span>
+        <p class="toc__title">Retailer Enablement</p>
+        <p class="toc__note">Designing a cross-product journey that made two products interoperable without pretending they were one.</p>
+      </a>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- 01 — UNIFIED INSIGHTS -->
+  <!-- ============================================================ -->
+  <article class="wrap study" id="unified-insights">
+    <p class="study__kicker">01 · Visibility &amp; trust</p>
+    <h2>Unified Insights</h2>
+    <p class="study__dek">Designing trust into account linking and unified campaign visibility.</p>
+
+    <div class="section">
+      <p class="section__label">The problem</p>
+      <p>
+        Brands and agencies managing retail media across multiple retailers were working in a
+        fragmented system: retailer-specific platforms on one side, our product on the other.
+        There was no single place to see internally-billed and retailer-sold campaigns side by
+        side, and roughly 70% of retail media spend sat on the invisible side of that line.
+        Third-party partners had no programmatic access to retailer-sold campaign data, and many
+        managed-service brands had no direct access to those campaigns at all.
+      </p>
+      <p>
+        The fragmentation wasn't just a UI problem. The relationship between accounts,
+        permissions, consent, billing, and campaign ownership was genuinely hard to explain: one
+        user could see a campaign without permission to edit it, while another could deep-link in
+        and make changes.
+      </p>
+      <p>The design question: how might we give users a unified view of their retail media activity while making access, consent, and edit boundaries clear?</p>
+    </div>
+
+    <div class="section">
+      <p class="section__label">Key decisions</p>
+      <div class="decision">
+        <h4>Consent first, linking second — even though it added a step</h4>
+        <p>The fastest path to "unified" would have surfaced connected campaigns as soon as a technical link existed. I pushed for a deliberate two-step sequence — consent, then linking — because campaign data appearing without a legible relationship would have undermined retailer trust in the whole model. The extra step was the trust mechanism, not friction.</p>
+      </div>
+      <div class="decision">
+        <h4>Read-only as a product choice, not a limitation</h4>
+        <p>With uneven permissions across users, we could have hidden restricted campaigns entirely, or shown everything and let edit attempts fail. I argued for a third path: make the surface honestly read-only for everyone, with deep links out for users who already held edit access elsewhere. Visibility improved without overpromising control.</p>
+      </div>
+      <div class="decision">
+        <h4>Unified alongside, not blended in</h4>
+        <p>Once linked, external campaigns appear automatically in the main campaign view — visually distinguished, not merged in. Users get the benefit of one surface without losing track of what they're looking at or who bills for it.</p>
+      </div>
+      <div class="decision">
+        <h4>Treating terminology as information architecture</h4>
+        <p>The project accumulated overlapping names for concepts that weren't actually synonyms. I drove the separation and naming work myself — it wasn't a wording pass at the end, it was part of designing the system.</p>
+      </div>
+    </div>
+
+    <div class="figure">
+      <div class="cover" style="aspect-ratio:16/9; background: linear-gradient(140deg,#3E6B4A,#A8C9A0);"></div>
+      <p class="figure__cap">Account-linking and consent flow, alongside the unified campaign view.</p>
+    </div>
+
+    <div class="section">
+      <p class="section__label">Outcome</p>
+      <p>
+        This initiative's broad rollout was deferred at launch — a related program shipped first
+        with a narrower mechanism as the core focus. That deferral is part of the story, not a
+        footnote: the account-linking and consent model designed here became the enabling
+        mechanism for that later launch. The design infrastructure — the consent sequence, the
+        linked-campaign visibility pattern, the read-only/deep-link permission model, and the
+        terminology system — shipped into production through a different door than originally
+        planned.
+      </p>
+    </div>
+
+    <div class="section">
+      <p class="section__label">What I learned</p>
+      <p>
+        A unified experience doesn't require every action to happen in one product. The most
+        important design move wasn't adding functionality — it was giving users a coherent mental
+        model of the relationship between products, then making the boundaries around visibility
+        and control explicit. That principle became a recurring pattern across the whole program.
+      </p>
+    </div>
+  </article>
+
+  <!-- ============================================================ -->
+  <!-- 02 — AUTHORIZED BUYERS + RETAILER BUDGET -->
+  <!-- ============================================================ -->
+  <article class="wrap study" id="authorized-buyers">
+    <p class="study__kicker">02 · Governance &amp; activation</p>
+    <h2>Authorized Buyers + Retailer Budget</h2>
+    <p class="study__dek">Designing the activation path from retailer approval to campaign creation.</p>
+
+    <div class="section">
+      <p class="section__label">The problem</p>
+      <p>
+        Retailer-sold activation required explicit approval, controlled access, and a usable
+        execution path — none of which existed as a system. Without governance, any brand account
+        with basic product access could potentially have launched retailer-sold campaigns without
+        retailer approval, creating real risk around contracts, credit exposure, and eligibility.
+      </p>
+      <p>
+        The challenge was never just an approval screen. It was making the relationship between
+        retailer control, brand access, campaign restrictions, balances, and campaign creation
+        understandable across different account types and product surfaces.
+      </p>
+    </div>
+
+    <div class="section">
+      <p class="section__label">How the pieces fit together</p>
+      <ol class="numbered-flow">
+        <li>A retailer approves a brand's account as an Authorized Buyer, at the account level.</li>
+        <li>Campaign-type access is applied — the retailer controls which campaign and buy types are permitted.</li>
+        <li>A retailer-funded balance becomes available for approved accounts to use.</li>
+        <li>The brand creates a retailer-funded campaign using the standard campaign flow.</li>
+        <li>The campaign appears in unified reporting with new activation and budget-model dimensions.</li>
+      </ol>
+    </div>
+
+    <div class="section">
+      <p class="section__label">Key decisions</p>
+      <div class="decision">
+        <h4>Tell the end-to-end story, not the permission story</h4>
+        <p>Authorized status is presented as the start of an activation workflow, not a destination. Otherwise approval reads as bureaucracy instead of capability.</p>
+      </div>
+      <div class="decision">
+        <h4>Make retailer control visible without making brands feel blocked</h4>
+        <p>The brand side needed a mirror image of retailer control: clear visibility of what access exists, and predictable, explained states when something isn't permitted — rather than options that silently fail.</p>
+      </div>
+      <div class="decision">
+        <h4>Use permissions to filter downstream choices</h4>
+        <p>The retailers, balances, and campaign types shown during activation reflect the user's actual authorization state. Users never choose an option their account can't complete — the single biggest source of setup errors in permission-gated flows.</p>
+      </div>
+      <div class="decision">
+        <h4>Design for the manual launch and the self-serve future at once</h4>
+        <p>Launch had internal teams handling setup manually, with brands self-serving campaign creation. I shaped the terminology and structure so a future self-service model builds on the same mental model — phased rollout without a migration.</p>
+      </div>
+    </div>
+
+    <div class="section">
+      <p class="section__label">Outcome</p>
+      <p>
+        This mechanism shipped to general availability as the core of the program. Retailers can
+        approve eligible brand accounts, campaign access reflects retailer-defined permissions,
+        and approved brands create retailer-funded campaigns through the standard flow.
+      </p>
+    </div>
+
+    <div class="section">
+      <p class="section__label">What I learned</p>
+      <p>
+        Permissioning isn't a standalone UX layer when it determines whether a user can complete
+        the core job. The useful design work connected governance to the downstream action, so
+        approval, access, funding, and campaign creation formed one understandable system —
+        rather than "I designed an approval feature," the real story is connecting retailer
+        governance to real campaign activation.
+      </p>
+    </div>
+  </article>
+
+  <!-- ============================================================ -->
+  <!-- 03 — RETAILER ENABLEMENT -->
+  <!-- ============================================================ -->
+  <article class="wrap study" id="retailer-enablement">
+    <p class="study__kicker">03 · Interoperability</p>
+    <h2>Retailer Enablement</h2>
+    <p class="study__dek">Designing interoperability without breaking an existing ecosystem.</p>
+
+    <div class="section">
+      <p class="section__label">The problem</p>
+      <p>
+        A major retail partner wanted the benefits of the program, but not at the cost of
+        disrupting the workflow its buyers already relied on in their own existing platform. They
+        needed to retain visibility, configurability, and reporting in their established
+        environment, while gaining unified visibility on our side. A full migration, requiring
+        dual-edit capability that didn't exist yet, was off the table.
+      </p>
+      <p>The design question: how might our product become the place where users understand and navigate their retail media activity, while the partner's environment remains the place where their execution happens?</p>
+    </div>
+
+    <div class="section">
+      <p class="section__label">Key decisions</p>
+      <div class="decision">
+        <h4>Preserve the execution environment; add the visibility layer</h4>
+        <p>Partner campaigns stayed editable in the partner's own environment. Our product provided visibility, aggregation, and a clear entry point into the relevant workflow. This is what made participation possible at all — the alternative was no adoption.</p>
+      </div>
+      <div class="decision">
+        <h4>Account selection as the moment of commitment</h4>
+        <p>When a user starts campaign creation, an account selector makes the execution destination explicit — our platform for native campaigns, or the linked partner account for partner-specific ones. The fork is a conscious choice, not a surprise three screens later.</p>
+      </div>
+      <div class="decision">
+        <h4>Same-tab transitions with a guaranteed way home</h4>
+        <p>Handing off to the partner's workflow in the same browser tab preserved continuity and avoided window sprawl; a persistent "back" affordance made the return path predictable. Small mechanics, but they carry the entire feeling of one coherent journey.</p>
+      </div>
+      <div class="decision">
+        <h4>Interoperable, not artificially identical</h4>
+        <p>The design deliberately avoided pretending the two products were one. Partner-specific branding signals the context switch. When products have different responsibilities and permissions, a legible boundary is more trustworthy than a cosmetic merge.</p>
+      </div>
+    </div>
+
+    <div class="pull-quote">
+      The best cross-product experience is not always a fully unified interface. A clear handoff can be more trustworthy than a superficial visual merge.
+    </div>
+
+    <div class="section">
+      <p class="section__label">Outcome</p>
+      <p>
+        This became the route by which the Unified Insights design infrastructure reached
+        production. Partner-side buyers see linked campaigns in our product, start campaign
+        creation with an explicit choice of execution environment, and keep partner-specific
+        execution in the workflow they already trust — creating a real adoption path without
+        demanding a platform migration.
+      </p>
+    </div>
+
+    <div class="section">
+      <p class="section__label">What I learned</p>
+      <p>
+        The design challenge was less about hiding the product boundary and more about making it
+        understandable, navigable, and intentional.
+      </p>
+    </div>
+
+    <p class="note">
+      Details in this case study describing internal processes, named retailer partners, and
+      specific commercial terms have been generalized for public sharing.
+    </p>
+  </article>
+
+  <a class="wrap next-project" href="cloud-scripts.html">
+    <div>
+      <p class="next-project__label">Next project</p>
+      <p class="next-project__title">Cloud Scripts</p>
+    </div>
+    <span>→</span>
+  </a>
+
+</main>
+
+<footer class="footer wrap">
+  <a href="mailto:you@example.com">you@example.com</a>
+</footer>
+
+</body>
+</html>

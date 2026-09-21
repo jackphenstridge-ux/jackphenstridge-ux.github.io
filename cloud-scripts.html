@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cloud Scripts — Your Name</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300..600;1,6..72,300..400&family=IBM+Plex+Sans:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+/* Same token set as index.html — keep these two files in sync */
+:root {
+  --ground:  #E9EAE4;
+  --surface: #F4F5F0;
+  --ink:     #1A1D1C;
+  --muted:   #5F6461;
+  --rule:    #C7C9C0;
+  --accent:  #1E4FD8;
+
+  --measure: 34rem;
+  --page:    76rem;
+  --gutter:  clamp(1.25rem, 5vw, 4rem);
+
+  --serif: "Newsreader", Georgia, "Times New Roman", serif;
+  --sans:  "IBM Plex Sans", system-ui, -apple-system, sans-serif;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --ground: #15181A; --surface: #1D2124; --ink: #E8E9E3;
+    --muted: #969C97;  --rule: #343A3C;    --accent: #8FA9FF;
+  }
+}
+:root[data-theme="dark"] {
+  --ground: #15181A; --surface: #1D2124; --ink: #E8E9E3;
+  --muted: #969C97;  --rule: #343A3C;    --accent: #8FA9FF;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--ground);
+  color: var(--ink);
+  font-family: var(--serif);
+  font-size: 1.0625rem;
+  line-height: 1.65;
+  font-optical-sizing: auto;
+  -webkit-font-smoothing: antialiased;
+}
+
+img { max-width: 100%; display: block; border-radius: 2px; }
+a { color: var(--accent); text-underline-offset: 0.2em; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+.wrap {
+  max-width: var(--page);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+/* Header — identical to homepage */
+.masthead {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1.5rem;
+  padding-block: 1.75rem;
+  font-family: var(--sans);
+  font-size: 0.875rem;
+}
+.masthead__name { font-weight: 500; letter-spacing: -0.01em; color: var(--ink); text-decoration: none; }
+.masthead__nav { display: flex; gap: 1.5rem; }
+.masthead__nav a { color: var(--muted); text-decoration: none; }
+.masthead__nav a:hover { color: var(--ink); }
+
+/* Case study intro block */
+.case-header { padding-block: clamp(3rem, 10vh, 6rem) clamp(2rem, 6vh, 3.5rem); }
+
+.case-header__eyebrow {
+  font-family: var(--sans);
+  font-size: 0.8125rem;
+  color: var(--muted);
+  margin: 0 0 1rem;
+}
+
+.case-header h1 {
+  font-size: clamp(2.25rem, 6vw, 3.5rem);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  font-weight: 400;
+  margin: 0 0 1rem;
+  max-width: 22ch;
+}
+
+.case-header__sub {
+  max-width: var(--measure);
+  color: var(--muted);
+  font-size: 1.125rem;
+  margin: 0 0 2rem;
+}
+
+.meta-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 2.5rem;
+  font-family: var(--sans);
+  font-size: 0.8125rem;
+  border-top: 1px solid var(--rule);
+  padding-top: 1.5rem;
+}
+.meta-row dt { color: var(--muted); margin: 0; }
+.meta-row dd { margin: 0.15rem 0 0; font-weight: 500; }
+
+.cover {
+  aspect-ratio: 16/9;
+  border-radius: 2px;
+  margin-top: 2.5rem;
+}
+
+/* Body sections */
+.section { padding-block: clamp(2.5rem, 7vh, 4.5rem); border-top: 1px solid var(--rule); }
+.section__label {
+  font-family: var(--sans);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--muted);
+  margin: 0 0 1.25rem;
+}
+.section h2 {
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-weight: 400;
+  letter-spacing: -0.015em;
+  margin: 0 0 1.25rem;
+  max-width: 26ch;
+}
+.section p, .section ul { max-width: var(--measure); }
+.section p { margin: 0 0 1.15rem; }
+.section ul { padding-left: 1.1rem; margin: 0 0 1.15rem; }
+.section li { margin-bottom: 0.5rem; }
+
+.pull-quote {
+  max-width: var(--measure);
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 1.375rem;
+  line-height: 1.5;
+  color: var(--ink);
+  border-left: 2px solid var(--accent);
+  padding-left: 1.5rem;
+  margin: 2rem 0;
+}
+.pull-quote cite {
+  display: block;
+  font-family: var(--sans);
+  font-style: normal;
+  font-size: 0.8125rem;
+  color: var(--muted);
+  margin-top: 0.75rem;
+}
+
+.figure { margin: 2rem 0; }
+.figure__cap {
+  font-family: var(--sans);
+  font-size: 0.8125rem;
+  color: var(--muted);
+  margin-top: 0.6rem;
+}
+
+.two-col {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.5rem;
+  max-width: none;
+}
+.card {
+  background: var(--surface);
+  border-radius: 3px;
+  padding: 1.5rem;
+}
+.card h3 {
+  font-family: var(--sans);
+  font-size: 0.9375rem;
+  font-weight: 500;
+  margin: 0 0 0.6rem;
+}
+.card p { font-size: 0.9375rem; color: var(--muted); margin: 0; max-width: none; }
+
+.next-project {
+  border-top: 1px solid var(--rule);
+  padding-block: clamp(3rem, 8vh, 5rem);
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 1rem;
+  text-decoration: none;
+  color: inherit;
+}
+.next-project__label { font-family: var(--sans); font-size: 0.8125rem; color: var(--muted); }
+.next-project__title { font-size: clamp(1.5rem, 4vw, 2.25rem); font-weight: 400; margin: 0.4rem 0 0; }
+.next-project:hover .next-project__title { color: var(--accent); }
+
+.footer {
+  border-top: 1px solid var(--rule);
+  padding-block: 2.5rem 4rem;
+  font-family: var(--sans);
+  font-size: 0.875rem;
+  color: var(--muted);
+}
+</style>
+</head>
+
+<body>
+
+<header class="wrap masthead">
+  <a class="masthead__name" href="index.html">Your Name</a>
+  <nav class="masthead__nav">
+    <a href="index.html#work">Work</a>
+    <a href="index.html#about">About</a>
+    <a href="mailto:you@example.com">Email</a>
+  </nav>
+</header>
+
+<main>
+
+  <section class="wrap case-header">
+    <p class="case-header__eyebrow">Case study</p>
+    <h1>Cloud Scripts</h1>
+    <p class="case-header__sub">
+      A low-code automation tool that replaced a legacy scripting system agencies
+      couldn't maintain — and one of the deciding factors in over 100 agencies
+      adopting the wider platform.
+    </p>
+    <dl class="meta-row">
+      <div><dt>Role</dt><dd>Lead Designer, Researcher</dd></div>
+      <div><dt>Team</dt><dd>Product, Engineering, Design Systems</dd></div>
+      <div><dt>Timeline</dt><dd>Ongoing</dd></div>
+    </dl>
+    <div class="cover" style="background: linear-gradient(140deg,#2E5B8A,#7FB0C9);"></div>
+  </section>
+
+  <section class="wrap section">
+    <p class="section__label">The situation</p>
+    <h2>Users were migrating to a new platform, but their automation tools weren't coming with them.</h2>
+    <p>
+      Agencies had spent years building "scripts" in our legacy desktop tool to automate
+      repetitive tasks — ticketing, refunds, prompts, custom workflows. The tools were painful:
+      steep learning curve, hard to maintain, next to impossible to share between team members.
+      But they were also load-bearing. When we planned the move to our new cloud platform, we
+      assumed its built-in features would cover what those scripts did.
+    </p>
+    <p>
+      They didn't. Research told us that fast, and it told us why.
+    </p>
+  </section>
+
+  <section class="wrap section">
+    <p class="section__label">Research</p>
+    <h2>What automation actually meant to the people using it</h2>
+    <p>
+      We ran a survey of 100+ users already relying on legacy automation, paired with six
+      in-depth interviews (45–60 minutes each) with the people who actually built and maintained
+      scripts for their teams, plus a teardown of existing tools against modern alternatives.
+    </p>
+    <p>
+      Three-quarters of respondents used some form of automation multiple times a day — mostly
+      to save time on repetitive tasks, standardize error-prone processes like ticketing and
+      refunds, and inject custom content the platform didn't natively support. But almost nobody
+      wanted to build a script from scratch. Most people were editing existing ones and hoping
+      for the best.
+    </p>
+    <div class="pull-quote">
+      "I don't create Smartbuttons from scratch — I only edit existing ones, because I don't
+      know where to start."
+      <cite>— Research participant</cite>
+    </div>
+    <p>
+      That single line reframed the brief. The legacy tool required users to write raw XML by
+      hand, with a few "helper" buttons that only partially bridged the gap. The real pain point
+      wasn't automation itself — it was that building automation required knowing a coding
+      language nobody had signed up to learn.
+    </p>
+  </section>
+
+  <section class="wrap section">
+    <p class="section__label">Who we were designing for</p>
+    <h2>Three groups, two of them our real audience</h2>
+    <p>
+      We mapped existing personas onto three functional groups. <strong>Users</strong> run
+      scripts without ever building one — often without realizing automation is even involved.
+      <strong>Creators</strong> build and maintain scripts for themselves or their team, with
+      enough technical fluency to handle complex bookings. <strong>Admins</strong> do everything
+      a Creator does, plus manage distribution and standardization across a whole agency.
+    </p>
+    <p>
+      Design effort went almost entirely toward Creators and Admins — they're the ones who'd
+      actually touch the editor. Users just needed the output to keep working invisibly, the way
+      it always had.
+    </p>
+  </section>
+
+  <section class="wrap section">
+    <p class="section__label">Designing the editor</p>
+    <h2>An infinite canvas, not a form</h2>
+    <p>
+      The core design decision was moving away from a linear, XML-driven editor toward a visual,
+      infinite-canvas builder where each automation step is its own expandable block. Because the
+      tool's logic was too complex to validate safely in a static prototype, we made an early call
+      to build and ship a live proof-of-concept rather than test mockups — internal teams and
+      customer-facing staff used the real thing and reported back.
+    </p>
+    <div class="figure">
+      <div class="cover" style="aspect-ratio:16/10; background: linear-gradient(140deg,#8A5B2E,#D9B27F);"></div>
+      <p class="figure__cap">Early wireframe exploration for the step-builder canvas.</p>
+    </div>
+  </section>
+
+  <section class="wrap section">
+    <p class="section__label">Testing &amp; iteration</p>
+    <h2>What a one-hour moderated test surfaced</h2>
+    <p>
+      We ran task-based moderated testing with a mix of novice and experienced users. Most
+      completed their tasks fine — but a handful of usability problems were consistent enough to
+      fix before the next release:
+    </p>
+    <div class="two-col">
+      <div class="card">
+        <h3>Getting lost in long scripts</h3>
+        <p>Solved with a zoomable, collapsible canvas so users could move between overview and detail without losing their place.</p>
+      </div>
+      <div class="card">
+        <h3>Errors were hard to find</h3>
+        <p>Added an error panel that lists every issue with a direct link to jump to it in the script.</p>
+      </div>
+      <div class="card">
+        <h3>Steps crowded the canvas</h3>
+        <p>Moved the step-builder out of the flow and into a side panel, cutting clutter from the main view.</p>
+      </div>
+      <div class="card">
+        <h3>No recovery for deleted work</h3>
+        <p>Introduced a "deleted scripts" page and a clear marker for unsaved changes.</p>
+      </div>
+    </div>
+    <p>
+      We also added an advanced settings area for admin-level script management, since nothing
+      like it had existed before.
+    </p>
+  </section>
+
+  <section class="wrap section">
+    <p class="section__label">Design systems</p>
+    <h2>Building components once, for everyone</h2>
+    <p>
+      Cloud Scripts needed several UI patterns that didn't exist yet — a step header, a compact
+      "add step" control, a draggable step block. Rather than maintain custom components outside
+      our design system and let them drift out of sync, I worked with the design systems team to
+      get them added properly: the step header, the rounded add-step button, and the draggable
+      step block all shipped into the shared library for other teams to use.
+    </p>
+  </section>
+
+  <section class="wrap section">
+    <p class="section__label">Outcome</p>
+    <h2>Adoption followed, and it kept the platform's biggest deals alive</h2>
+    <p>
+      Feedback since launch has been consistently positive — people report real time savings and
+      an easier experience than the legacy tools. More concretely, automation support became a
+      deciding factor for over 100 agencies choosing to adopt the wider platform, and it played a
+      direct role in closing several major accounts where automation was a hard requirement.
+    </p>
+    <p>
+      The two things I'd point to as decisive: shipping a live proof-of-concept instead of testing
+      a static prototype, which let us surface real problems fast on a tool too complex to fake
+      convincingly — and treating the design-system work as part of the deliverable, not an
+      afterthought, which meant the team could keep building without re-litigating every UI
+      decision.
+    </p>
+  </section>
+
+  <section class="wrap section">
+    <p class="section__label">What's next</p>
+    <h2>Open problems we're still working through</h2>
+    <ul>
+      <li><strong>Finding variables.</strong> The list of variables users can reference is long and inconsistently named. We're designing a smart search that matches synonyms — searching "passenger" also finds "traveler" or "person."</li>
+      <li><strong>Sharing at scale.</strong> Right now, sharing a script means exporting a JSON file. Larger agencies want centralized distribution, which means a proper sharing panel for admins.</li>
+      <li><strong>More triggers.</strong> Scripts can currently only fire from clicks or terminal activity. Broader trigger support is next.</li>
+      <li><strong>Agentic script building.</strong> Early discovery was underway on letting users describe what they want in plain language and have the tool generate the script, rather than building it step by step.</li>
+    </ul>
+  </section>
+
+  <a class="wrap next-project" href="#">
+    <div>
+      <p class="next-project__label">Next project</p>
+      <p class="next-project__title">Booking Snapshot</p>
+    </div>
+    <span>→</span>
+  </a>
+
+</main>
+
+<footer class="footer wrap">
+  <a href="mailto:you@example.com">you@example.com</a>
+</footer>
+
+</body>
+</html>

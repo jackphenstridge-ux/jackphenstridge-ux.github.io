@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Contract Is the Interface — Your Name</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300..600;1,6..72,300..400&family=IBM+Plex+Sans:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+/* Same token set as the rest of the site */
+:root {
+  --ground:  #E9EAE4;
+  --surface: #F4F5F0;
+  --ink:     #1A1D1C;
+  --muted:   #5F6461;
+  --rule:    #C7C9C0;
+  --accent:  #1E4FD8;
+
+  --measure: 34rem;
+  --page:    76rem;
+  --gutter:  clamp(1.25rem, 5vw, 4rem);
+
+  --serif: "Newsreader", Georgia, "Times New Roman", serif;
+  --sans:  "IBM Plex Sans", system-ui, -apple-system, sans-serif;
+  --mono:  ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --ground: #15181A; --surface: #1D2124; --ink: #E8E9E3;
+    --muted: #969C97;  --rule: #343A3C;    --accent: #8FA9FF;
+  }
+}
+:root[data-theme="dark"] {
+  --ground: #15181A; --surface: #1D2124; --ink: #E8E9E3;
+  --muted: #969C97;  --rule: #343A3C;    --accent: #8FA9FF;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--ground);
+  color: var(--ink);
+  font-family: var(--serif);
+  font-size: 1.0625rem;
+  line-height: 1.65;
+  font-optical-sizing: auto;
+  -webkit-font-smoothing: antialiased;
+}
+
+img { max-width: 100%; display: block; border-radius: 2px; }
+a { color: var(--accent); text-underline-offset: 0.2em; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+code { font-family: var(--mono); font-size: 0.85em; }
+
+.wrap { max-width: var(--page); margin-inline: auto; padding-inline: var(--gutter); }
+
+.masthead {
+  display: flex; justify-content: space-between; align-items: baseline;
+  gap: 1.5rem; padding-block: 1.75rem; font-family: var(--sans); font-size: 0.875rem;
+}
+.masthead__name { font-weight: 500; letter-spacing: -0.01em; color: var(--ink); text-decoration: none; }
+.masthead__nav { display: flex; gap: 1.5rem; }
+.masthead__nav a { color: var(--muted); text-decoration: none; }
+.masthead__nav a:hover { color: var(--ink); }
+
+.case-header { padding-block: clamp(3rem, 10vh, 6rem) clamp(2rem, 6vh, 3.5rem); }
+.case-header__eyebrow { font-family: var(--sans); font-size: 0.8125rem; color: var(--muted); margin: 0 0 1rem; }
+.case-header h1 {
+  font-size: clamp(2.25rem, 6vw, 3.5rem); line-height: 1.1; letter-spacing: -0.02em;
+  font-weight: 400; margin: 0 0 1rem; max-width: 20ch;
+}
+.case-header__sub { max-width: var(--measure); color: var(--muted); font-size: 1.125rem; margin: 0 0 2rem; }
+
+.meta-row {
+  display: flex; flex-wrap: wrap; gap: 0.5rem 2.5rem; font-family: var(--sans); font-size: 0.8125rem;
+  border-top: 1px solid var(--rule); padding-top: 1.5rem;
+}
+.meta-row dt { color: var(--muted); margin: 0; }
+.meta-row dd { margin: 0.15rem 0 0; font-weight: 500; }
+
+/* The "contract fragment" — a stylized code block standing in for a real API call */
+.fragment {
+  margin-top: 2.5rem;
+  border: 1px solid var(--rule);
+  border-radius: 3px;
+  background: var(--surface);
+  overflow: hidden;
+}
+.fragment-head {
+  display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap;
+  padding: 0.6rem 0.9rem; border-bottom: 1px solid var(--rule);
+  font-family: var(--mono); font-size: 0.8125rem;
+}
+.verb {
+  background: var(--accent); color: var(--ground); padding: 1px 7px; border-radius: 2px;
+  font-weight: 600; font-size: 0.75rem; letter-spacing: 0.04em;
+}
+.route { color: var(--muted); overflow-wrap: anywhere; }
+.tier {
+  margin-left: auto; color: var(--muted); border: 1px solid var(--rule);
+  padding: 1px 7px; border-radius: 2px; font-family: var(--sans);
+  font-size: 0.6875rem; letter-spacing: 0.08em; text-transform: uppercase;
+}
+.fragment-body { overflow-x: auto; }
+.fragment-body pre { margin: 0; padding: 1rem; font-family: var(--mono); font-size: 0.8125rem; line-height: 1.7; color: var(--ink); }
+.fragment-foot {
+  border-top: 1px solid var(--rule); padding: 0.75rem 0.9rem;
+  font-family: var(--sans); font-size: 0.875rem; color: var(--muted); margin: 0;
+}
+
+.section { padding-block: clamp(2.5rem, 7vh, 4.5rem); border-top: 1px solid var(--rule); }
+.section__label { font-family: var(--sans); font-size: 0.8125rem; font-weight: 500; color: var(--muted); margin: 0 0 1.1rem; }
+.section h2 { font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 400; letter-spacing: -0.015em; margin: 0 0 1.25rem; max-width: 26ch; }
+.section p, .section ul, .section ol { max-width: var(--measure); }
+.section p { margin: 0 0 1.15rem; }
+.section ul, .section ol { padding-left: 1.1rem; margin: 0 0 1.15rem; }
+.section li { margin-bottom: 0.5rem; }
+
+.decision {
+  background: var(--surface); border-radius: 3px; padding: 1.5rem 1.75rem;
+  margin-bottom: 1rem; max-width: var(--measure);
+}
+.decision h4 { font-family: var(--sans); font-size: 0.9375rem; font-weight: 500; margin: 0 0 0.5rem; }
+.decision p { font-size: 0.9375rem; color: var(--muted); margin: 0 0 0.6rem; max-width: none; }
+.decision p:last-child { margin-bottom: 0; }
+
+.two-col { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.5rem; max-width: none; }
+.card { background: var(--surface); border-radius: 3px; padding: 1.5rem; }
+.card h3 { font-family: var(--sans); font-size: 0.9375rem; font-weight: 500; margin: 0 0 0.6rem; }
+.card ul { padding-left: 1.1rem; margin: 0; font-size: 0.9375rem; color: var(--muted); max-width: none; }
+.card li { margin-bottom: 0.4rem; }
+
+.gates { display: grid; grid-template-columns: 1fr auto 1fr; gap: 1.5rem; align-items: start; max-width: none; }
+.gate { background: var(--surface); border-radius: 3px; padding: 1.5rem; }
+.gate h4 { font-family: var(--sans); font-size: 0.9375rem; font-weight: 500; margin: 0 0 0.3rem; }
+.gate-sub { font-size: 0.875rem; color: var(--muted); margin: 0 0 0.9rem; }
+.gate ul { padding-left: 1.1rem; margin: 0; font-size: 0.9375rem; }
+.gate-arrow { display: flex; align-items: center; justify-content: center; color: var(--accent); font-size: 1.5rem; padding-top: 2.5rem; }
+@media (max-width: 700px) {
+  .gates { grid-template-columns: 1fr; }
+  .gate-arrow { display: none; }
+}
+
+.pull-quote {
+  max-width: var(--measure); font-family: var(--serif); font-style: italic; font-size: 1.25rem;
+  line-height: 1.5; color: var(--ink); border-left: 2px solid var(--accent); padding-left: 1.5rem; margin: 1.75rem 0;
+}
+
+.numbered-flow { counter-reset: flow; list-style: none; padding: 0; max-width: var(--measure); }
+.numbered-flow li { counter-increment: flow; position: relative; padding-left: 2.25rem; margin-bottom: 1rem; }
+.numbered-flow li::before {
+  content: counter(flow); position: absolute; left: 0; top: 0; font-family: var(--sans); font-size: 0.8125rem;
+  color: var(--accent); border: 1px solid var(--rule); width: 1.5rem; height: 1.5rem; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+}
+
+.lessons { display: grid; gap: 1.5rem; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); max-width: none; }
+.lesson { border-top: 2px solid var(--accent); padding-top: 0.9rem; }
+.lesson h3 { font-family: var(--sans); font-size: 1rem; font-weight: 500; margin: 0 0 0.5rem; }
+.lesson p { font-size: 0.9375rem; color: var(--muted); margin: 0; max-width: none; }
+
+.note {
+  font-family: var(--sans); font-size: 0.8125rem; color: var(--muted);
+  border-top: 1px solid var(--rule); padding-top: 1rem; margin-top: 2rem; max-width: var(--measure);
+}
+
+.disclaimer {
+  font-family: var(--sans);
+  font-size: 0.875rem;
+  line-height: 1.55;
+  color: var(--ink);
+  background: var(--surface);
+  border-left: 3px solid var(--accent);
+  border-radius: 2px;
+  padding: 1rem 1.25rem;
+  margin-top: 2rem;
+  max-width: var(--measure);
+}
+.disclaimer strong { font-weight: 500; }
+
+.next-project {
+  border-top: 1px solid var(--rule); padding-block: clamp(3rem, 8vh, 5rem);
+  display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 1rem;
+  text-decoration: none; color: inherit;
+}
+.next-project__label { font-family: var(--sans); font-size: 0.8125rem; color: var(--muted); }
+.next-project__title { font-size: clamp(1.5rem, 4vw, 2.25rem); font-weight: 400; margin: 0.4rem 0 0; }
+.next-project:hover .next-project__title { color: var(--accent); }
+
+.footer { border-top: 1px solid var(--rule); padding-block: 2.5rem 4rem; font-family: var(--sans); font-size: 0.875rem; color: var(--muted); }
+</style>
+</head>
+
+<body>
+
+<header class="wrap masthead">
+  <a class="masthead__name" href="index.html">Your Name</a>
+  <nav class="masthead__nav">
+    <a href="index.html#work">Work</a>
+    <a href="index.html#about">About</a>
+    <a href="mailto:you@example.com">Email</a>
+  </nav>
+</header>
+
+<main>
+
+  <section class="wrap case-header">
+    <p class="case-header__eyebrow">Case study · Retail media</p>
+    <h1>The contract is the interface</h1>
+    <p class="case-header__sub">
+      Retailers wanted to run display campaigns from their own systems. That meant shipping a
+      product with no screens — where the statuses, the error shapes, and the order you're allowed
+      to build in <em>are</em> the design.
+    </p>
+    <dl class="meta-row">
+      <div><dt>Role</dt><dd>End-to-end UX owner, sole designer</dd></div>
+      <div><dt>Team</dt><dd>Product, Engineering, Technical Writing, GTM</dd></div>
+      <div><dt>Status</dt><dd>Pre-launch — guide drafted, API experimental</dd></div>
+    </dl>
+
+    <div class="fragment">
+      <div class="fragment-head">
+        <span class="verb">POST</span>
+        <span class="route">/line-items</span>
+        <span class="tier">Illustrative</span>
+      </div>
+      <div class="fragment-body"><pre>{
+  "data": {
+    "type": "line-item",
+    "attributes": {
+      "name": "…",
+      "retailerId": "…",
+      "campaignId": "…"
+      // configuration fields withheld pending public launch
+    }
+  }
+}</pre></div>
+      <p class="fragment-foot">
+        Submit → 204 No Content. For most of this project, that empty response was the only way a
+        client could find out whether its line item was actually ready. That's where the design
+        work started.
+      </p>
+    </div>
+
+    <p class="disclaimer">
+      <strong>A note on this case study:</strong> this product has not yet publicly launched.
+      Specific contract details, commercial figures, and internal process detail have been
+      withheld or generalized below, and will be updated once the API is publicly released.
+    </p>
+  </section>
+
+  <section class="wrap section">
+    <p class="section__label">The business problem</p>
+    <h2>Retailers wanted to build on top of us, and couldn't</h2>
+    <p>
+      The reporting side of our API was widely used and broadly fine. The campaign and creative
+      endpoints were not — unintuitive, never designed to scale, and incomplete enough that part of
+      every workflow fell back to the main interface. That stopped retailers from building their
+      own operating layer on top of our platform, and stopped partner platforms from reselling our
+      supply inside their own products.
+    </p>
+    <p>
+      Several retailers, ranging from large national chains to smaller regional players, had
+      independently asked for the same thing: the ability to create and manage campaigns
+      programmatically from their own order-management systems, self-service tools, or partner
+      platforms, rather than through our UI. None of them wanted a better campaign screen — each
+      wanted campaign creation to be one step inside a workflow they already owned.
+    </p>
+  </section>
+
+  <section class="wrap section">
+    <p class="section__label">The argument</p>
+    <h2>A product with no interface still has an experience</h2>
+    <p>
+      A designer belongs on an API project because most of a developer's experience of a product
+      has nothing to do with endpoint design. Discovery, documentation, authentication, the first
+      successful call, surviving a version change, asking for help — that's most of the journey,
+      and it's where integrations succeed or stall. Endpoint shape is a small slice of it.
+    </p>
+    <p>
+      I used that framing in every stakeholder conversation, because it reframed the request.
+      Product was asking for endpoints. The fuller picture showed that shipping endpoints without
+      the terminology, the failure behavior, and the first-call path right would leave most of the
+      journey unowned — and that's exactly where support tickets come from.
+    </p>
+    <div class="pull-quote">
+      Terminology drift is a UX bug. When the concept is called one thing in the product and
+      something else on the wire, developers follow the wire format and lose confidence in the
+      product's vocabulary.
+    </div>
+  </section>
+
+  <section class="wrap section">
+    <p class="section__label">The design response</p>
+    <h2>Four decisions that changed the contract</h2>
+    <p>
+      The biggest UX moves here weren't screens — they were rules about how the API behaves,
+      argued through with product and engineering. Each one is a genuine fork in the road, and the
+      later ones depend on the earlier ones.
+    </p>
+    <div class="decision">
+      <h4>Any order, not a wizard</h4>
+      <p>The UI enforced a sequence — finish one screen before the next unlocks. The API instead creates the line item first, then accepts configuration in any order, at any time.</p>
+      <p>This matches how integrating systems actually work. A client system may hold products, targets, and creative data in different services, available at different moments. A wizard forces it to buffer everything and replay it in our order.</p>
+    </div>
+    <div class="decision">
+      <h4>Reject the impossible; surface the temporary</h4>
+      <p>A configuration that can never work fails immediately at write time. A configuration that's valid but temporarily undeliverable is accepted and explained through a separate diagnostics step.</p>
+      <p>Without that split, an API either blocks people mid-build with conditional logic, or silently accepts things that will never actually deliver. Both are failures — they just fail at different times.</p>
+    </div>
+    <div class="decision">
+      <h4>Review status lives on the property, not the whole</h4>
+      <p>Approval is modeled at the level of the individual reviewable thing — each keyword, product, and creative carries its own status, rather than one rolled-up status for the entire line item.</p>
+      <p>A single status tells a client something is wrong but not what. Property-level state lets an integration show its own user exactly which two things were rejected, and leave the other forty alone.</p>
+    </div>
+    <div class="decision">
+      <h4>Review readiness is not delivery readiness</h4>
+      <p>Submitting for retailer review and being eligible to actually deliver are different gates. Configuration completeness, activation, funding, and retailer approval stay as separate concepts instead of collapsing into one lifecycle status.</p>
+      <p>This is the decision I'd defend hardest. Every platform is tempted to give clients one status field. It's always a lie by the second release, because the reasons something isn't live are independent of one another.</p>
+    </div>
+  </section>
+
+  <section class="wrap section">
+    <p class="section__label">The model</p>
+    <h2>Two gates, not one status field</h2>
+    <p>
+      A line item passes two independent checks, and conflating them is what made the old
+      experience confusing — a client could have a perfectly configured line item that still
+      wasn't delivering, with no way to tell those two situations apart.
+    </p>
+    <div class="gates">
+      <div class="gate">
+        <h4>Configuration readiness</h4>
+        <p class="gate-sub">Is it complete enough to submit?</p>
+        <ul>
+          <li>Core details and campaign association</li>
+          <li>Products associated</li>
+          <li>Creative attached</li>
+          <li>Targeting configured</li>
+          <li>Bidding configured</li>
+          <li>Budget set and capped</li>
+        </ul>
+      </div>
+      <div class="gate-arrow">→</div>
+      <div class="gate">
+        <h4>Delivery readiness</h4>
+        <p class="gate-sub">Is it serving, and if not, why?</p>
+        <ul>
+          <li>Retailer approval received</li>
+          <li>Activation state correct</li>
+          <li>Funding and balance available</li>
+          <li>Budget not exhausted</li>
+          <li>Flight dates in range</li>
+          <li>Diagnostics available for anything blocking delivery</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap section">
+    <p class="section__label">The method</p>
+    <h2>Documentation turned out to be the usability test</h2>
+    <p>
+      I expected writing the developer guide to be the packaging step after the design work. It
+      became the strongest validation tool on the project. If a complete flow couldn't be explained
+      in plain language, the product wasn't defined enough to hand to a customer. Writing it
+      surfaced dozens of open questions on a contract most of the team believed was already
+      settled — contradictions between what one endpoint returned and what another expected,
+      version references that didn't match, terminology that meant one thing in conversation and
+      something else on the wire.
+    </p>
+    <p>Six practices kept that workable against a contract that kept moving underneath the writing:</p>
+    <ul>
+      <li>Plain language before schemas — if I couldn't narrate it, it wasn't designed yet.</li>
+      <li>Happy paths before reference tables.</li>
+      <li>A live working draft for the team, a polished version for eventual external use.</li>
+      <li>Every open question logged with a stated cost, not just a question mark.</li>
+      <li>Naming what's out of scope, loudly and early.</li>
+      <li>Flexible configuration with one readiness gate, kinder than conditional logic that blocks people mid-build.</li>
+    </ul>
+  </section>
+
+  <section class="wrap section">
+    <p class="section__label">The boundary</p>
+    <h2>What went into scope, and what I argued out of it</h2>
+    <p>
+      A hard delivery date on a significant commercial escalation made scope the main design
+      instrument. The useful move wasn't cutting features — it was naming the boundary precisely
+      enough that a pilot customer could actually plan around it.
+    </p>
+    <div class="two-col">
+      <div class="card">
+        <h3>In: the pilot surface</h3>
+        <ul>
+          <li>Campaign and line-item setup</li>
+          <li>Line-item create and update</li>
+          <li>Product association</li>
+          <li>Targeting configuration</li>
+          <li>Attaching existing creative by reference</li>
+          <li>Bidding configuration</li>
+          <li>Submit for review</li>
+          <li>Diagnostics</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Out: deliberately not in the MVP</h3>
+        <ul>
+          <li>Additional buy types beyond the pilot format</li>
+          <li>Creative authoring and preview — stays in the existing creative tool</li>
+          <li>Retailer approval by API — stays in the review interface</li>
+          <li>Forecasting endpoints</li>
+          <li>Bulk updates across line items</li>
+          <li>Line-item-level budgets</li>
+        </ul>
+      </div>
+    </div>
+    <p>
+      One boundary cost something real: because retailer approval stays in the interface for now,
+      the automated path stops at submission. A retailer can automate everything up to the handoff
+      and then has to open a screen. That's the right call for this phase, and it's still a broken
+      promise from an integrator's point of view — which is why an approval endpoint is the first
+      thing I'd push into the next phase.
+    </p>
+  </section>
+
+  <section class="wrap section">
+    <p class="section__label">Measurement</p>
+    <h2>How I proposed to know whether it worked</h2>
+    <p>
+      Because this kind of developer experience had never been measured before, there was no
+      baseline to inherit — so the metrics framework itself is part of the design work. Two sets:
+      one about whether developers can actually succeed, one about whether the business outcome
+      follows.
+    </p>
+    <div class="two-col">
+      <div class="card">
+        <h3>Developer experience</h3>
+        <ul>
+          <li>Time from access to first successful call</li>
+          <li>Time from first call to a review-ready line item</li>
+          <li>Time from a configuration failure to successful recovery</li>
+          <li>Share of users completing the happy path without direct support</li>
+          <li>Documentation questions and repeated error patterns, by endpoint</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Business outcome</h3>
+        <ul>
+          <li>Active retailer and partner integrations</li>
+          <li>Share of setup completed with no manual step</li>
+          <li>Integration implementation time</li>
+          <li>Support ticket reduction</li>
+          <li>Incremental spend from API-managed campaigns</li>
+        </ul>
+      </div>
+    </div>
+    <p>
+      Numeric targets were deliberately left to rollout. Setting them before a single pilot
+      integration existed would have produced figures with nothing behind them — the honest
+      framing held up better in review than invented thresholds would have.
+    </p>
+  </section>
+
+  <section class="wrap section">
+    <p class="section__label">Takeaways</p>
+    <h2>What I'd carry to the next API</h2>
+    <div class="lessons">
+      <div class="lesson">
+        <h3>Write the guide to test the design</h3>
+        <p>Plain-language documentation is the cheapest usability test available for a contract. It found real problems in something several teams considered already defined — before a customer did.</p>
+      </div>
+      <div class="lesson">
+        <h3>A subset is fine; different rules are not</h3>
+        <p>The UI and the API can expose different controls. The moment they apply different underlying business rules, every integrator's mental model breaks, and no amount of documentation repairs it.</p>
+      </div>
+      <div class="lesson">
+        <h3>Fewer fields is not less effort</h3>
+        <p>Removing a readiness field once made the surface look simpler and made the actual work harder. Surface area and cognitive load are different quantities, and only one of them is visible in an endpoint list.</p>
+      </div>
+      <div class="lesson">
+        <h3>Designers shape the product without drawing a screen</h3>
+        <p>The work that mattered most here was the mental model, the contract, the vocabulary, and the cross-functional decisions that shape every integration built on top of it.</p>
+      </div>
+    </div>
+  </section>
+
+  <a class="wrap next-project" href="cmax-expansion.html">
+    <div>
+      <p class="next-project__label">Next project</p>
+      <p class="next-project__title">CMax Expansion</p>
+    </div>
+    <span>→</span>
+  </a>
+
+</main>
+
+<footer class="footer wrap">
+  <a href="mailto:you@example.com">you@example.com</a>
+</footer>
+
+</body>
+</html>
