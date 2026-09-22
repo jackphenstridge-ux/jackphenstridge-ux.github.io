@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Jack Henstridge — UX Designer</title>
+<title>About — Jack Henstridge</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300..600;1,6..72,300..400&family=IBM+Plex+Sans:wght@400;500&display=swap" rel="stylesheet">
@@ -237,56 +237,40 @@ a { color: var(--accent); text-underline-offset: 0.2em; }
 <header class="wrap masthead">
   <a class="masthead__name" href="index.html">Jack Henstridge</a>
   <nav class="masthead__nav">
-    <a href="#work">Work</a>
-    <a href="about.html">About</a>
+    <a href="index.html#work">Work</a>
+    <a href="about.html" aria-current="page">About</a>
   </nav>
 </header>
 
 <main>
 
-  <section class="wrap opening">
-    <p>I design the parts of a product people use when they are <em>already frustrated</em>.</p>
-    <p class="opening__sub">
-      Ten years in service and product design, mostly in regulated industries
-      where the constraints are real and the users don't have a choice about
-      being there. Currently working at Criteo, based in Ann Arbor.
-    </p>
-  </section>
-
-  <section class="wrap" id="work">
-    <h2 class="section-head">Selected work</h2>
-    <div class="index">
-
-      <a class="entry" href="cmax-expansion.html" data-preview="linear-gradient(140deg,#2E5B8A,#7FB0C9)">
-        <h3 class="entry__title">CMax Expansion</h3>
-        <span class="entry__meta">Retail media · Program</span>
-        <p class="entry__note">Making fragmented retail media feel like one system, across three connected initiatives.</p>
-      </a>
-
-      <a class="entry" href="cloud-scripts.html" data-preview="linear-gradient(140deg,#8A5B2E,#D9B27F)">
-        <h3 class="entry__title">Cloud Scripts</h3>
-        <span class="entry__meta">Product design · Automation</span>
-        <p class="entry__note">A low-code tool that replaced a legacy scripting system and helped win over 100 agencies.</p>
-      </a>
-
-      <a class="entry" href="booking-snapshot.html" data-preview="linear-gradient(140deg,#3E6B4A,#A8C9A0)">
-        <h3 class="entry__title">Booking Snapshot</h3>
-        <span class="entry__meta">Product design · Travel</span>
-        <p class="entry__note">A real-time, at-a-glance view of bookings replacing manual refreshing and a cryptic command interface.</p>
-      </a>
-
-      <a class="entry" href="fast-track-campaigns.html" data-preview="linear-gradient(140deg,#5B3E6B,#B9A0C9)">
-        <h3 class="entry__title">Fast Track Campaigns</h3>
-        <span class="entry__meta">Product design · Retail media</span>
-        <p class="entry__note">Cut median campaign launch time from 35 minutes to 5 without a full platform rebuild.</p>
-      </a>
-
-      <a class="entry" href="onsite-display-api.html" data-preview="linear-gradient(140deg,#6B4A3E,#C9A79A)">
-        <h3 class="entry__title">The contract is the interface</h3>
-        <span class="entry__meta">API design · Retail media</span>
-        <p class="entry__note">Shipping a product with no screens, where statuses, errors and build order are the design.</p>
-      </a>
-
+  <section class="wrap about">
+    <h2 class="section-head">About</h2>
+    <div class="about__body">
+      <p>
+        I'm Jack. Originally from the UK, now living in Ann Arbor. I came to design
+        later than most, after a career in Human Machine Interface engineering.
+        Over time I realized the part I cared about most was the human side of
+        that equation. After years of self-teaching and bootcamps, I made the
+        switch properly to UX and Product Design.
+      </p>
+      <p>
+        I'm currently a UX Designer at Criteo, working in Retail Media across UI
+        and API design. Lately that's expanded into front-end work too, building
+        with AI tools directly rather than handing sketches off and hoping they
+        survive translation.
+      </p>
+      <p>
+        Outside of work I enjoy trail and ultra running, and I'm currently
+        training for my next race. I have a passion for wildlife and landscape
+        photography, which rewards patience and gives me a chance to sit still.
+        I'm also a father, and that shapes how I see almost everything else
+        here. It's hard to stay detached from how your work affects people once
+        you're responsible for someone who can't yet advocate for themselves.
+      </p>
+      <p>
+        I'd love to work together on something great.
+      </p>
     </div>
   </section>
 
@@ -296,34 +280,6 @@ a { color: var(--accent); text-underline-offset: 0.2em; }
   </section>
 
 </main>
-
-<div id="preview" aria-hidden="true"></div>
-
-<script>
-// Cursor-following preview for the work index.
-// Pure enhancement — the page works identically without it.
-(function () {
-  var preview = document.getElementById('preview');
-  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var touch   = window.matchMedia('(hover: none)').matches;
-  if (!preview || reduced || touch) return;
-
-  document.querySelectorAll('.entry').forEach(function (entry) {
-    entry.addEventListener('mouseenter', function () {
-      preview.style.background = entry.dataset.preview || 'var(--muted)';
-      preview.classList.add('is-visible');
-    });
-    entry.addEventListener('mouseleave', function () {
-      preview.classList.remove('is-visible');
-    });
-  });
-
-  document.addEventListener('mousemove', function (e) {
-    preview.style.left = e.clientX + 'px';
-    preview.style.top  = e.clientY + 'px';
-  });
-})();
-</script>
 
 </body>
 </html>
