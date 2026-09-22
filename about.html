@@ -217,6 +217,54 @@ a { color: var(--accent); text-underline-offset: 0.2em; }
 }
 .about__body p { margin: 0 0 1.25rem; }
 
+/* ---------------------------------------------------------------
+   7. KIND WORDS
+   Three quotes side by side on desktop, stacked on mobile. Same
+   rules and tokens as the rest of the page — no new colours.
+   --------------------------------------------------------------- */
+.testimonials {
+  padding-block: clamp(1rem, 4vh, 2rem) clamp(2rem, 6vh, 3rem);
+  border-top: 1px solid var(--rule);
+}
+
+.testimonials__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2.5rem;
+  margin-top: 1.75rem;
+}
+
+@media (max-width: 760px) {
+  .testimonials__grid { grid-template-columns: 1fr; }
+}
+
+.testimonial {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.testimonial blockquote {
+  margin: 0;
+  font-size: 1.0625rem;
+  line-height: 1.6;
+}
+
+.testimonial figcaption {
+  font-family: var(--sans);
+  font-size: 0.8125rem;
+  line-height: 1.5;
+  color: var(--muted);
+}
+
+.testimonial figcaption strong {
+  display: block;
+  color: var(--ink);
+  font-weight: 500;
+  margin-bottom: 0.15rem;
+}
+
 .contact {
   border-top: 1px solid var(--rule);
   padding-block: 2.5rem 4rem;
@@ -271,6 +319,43 @@ a { color: var(--accent); text-underline-offset: 0.2em; }
       <p>
         I'd love to work together on something great.
       </p>
+    </div>
+  </section>
+
+  <section class="wrap testimonials">
+    <h2 class="section-head">Kind words</h2>
+    <div class="testimonials__grid">
+
+      <figure class="testimonial">
+        <blockquote>
+          <p>"One of Jack's greatest strengths is his ability to quickly understand complicated business and technical problems and translate them into intuitive, actionable UX solutions. He is already operating at a Senior Product Designer level in many respects."</p>
+        </blockquote>
+        <figcaption>
+          <strong>Eric Oppitz</strong>
+          Design Lead, MediaRadar. Previously my Team Lead at Criteo.
+        </figcaption>
+      </figure>
+
+      <figure class="testimonial">
+        <blockquote>
+          <p>"Jack has the requisite design skills and temperament for approaching complex design challenges. He was successful at directing his research skills not just to product design but to team processes and how we worked."</p>
+        </blockquote>
+        <figcaption>
+          <strong>Matthew Ovington</strong>
+          VP of Design, Mastercard. Previously my Director of UX at Travelport.
+        </figcaption>
+      </figure>
+
+      <figure class="testimonial">
+        <blockquote>
+          <p>"Jack always demonstrated professionalism, curiosity, and a knack for trying out different ways of approaching problems. He would leverage AI to help define tools and work with the development teams to explore interaction patterns that hadn't been done before."</p>
+        </blockquote>
+        <figcaption>
+          <strong>Ashley Feeney</strong>
+          Product Design Manager, Travelport. My direct manager.
+        </figcaption>
+      </figure>
+
     </div>
   </section>
 
