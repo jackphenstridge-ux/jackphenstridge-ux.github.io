@@ -117,7 +117,12 @@ a { color: var(--accent); text-underline-offset: 0.2em; }
   aspect-ratio: 16/9;
   border-radius: 2px;
   margin-top: 2.5rem;
+  width: 100%;
+  object-fit: cover;
+  background: var(--surface);
 }
+
+.figure img { width: 100%; object-fit: cover; background: var(--surface); }
 
 .cover-placeholder {
   aspect-ratio: 16/9; border-radius: 2px; margin-top: 2.5rem;
@@ -252,9 +257,7 @@ a { color: var(--accent); text-underline-offset: 0.2em; }
       <div><dt>Team</dt><dd>Product, Engineering, Design Systems</dd></div>
       <div><dt>Timeline</dt><dd>Ongoing</dd></div>
     </dl>
-    <div class="cover-placeholder">
-      <p><span class="tag">Image placeholder</span>Cover — the Cloud Scripts low-code editor</p>
-    </div>
+    <img class="cover" src="images/cloud-scripts-cover.png" alt="The Cloud Scripts canvas editor showing a built automation flow, Build New Traveler Profile.">
   </section>
 
   <section class="wrap section">
@@ -287,6 +290,16 @@ a { color: var(--accent); text-underline-offset: 0.2em; }
       wanted to build a script from scratch. Most people were editing existing ones and hoping
       for the best.
     </p>
+    <div class="two-col">
+      <div class="figure">
+        <img src="images/cloud-scripts-research-frequency.png" alt="Survey result: 75.5% of respondents use custom scripts or plugins multiple times a day.">
+        <p class="figure__cap">75.5% of respondents used custom scripts or plugins multiple times a day.</p>
+      </div>
+      <div class="figure">
+        <img src="images/cloud-scripts-research-nocode-pref.png" alt="Survey result: 56% strongly agree they'd prefer a tool that doesn't require coding proficiency, out of 45 responses.">
+        <p class="figure__cap">56% strongly agreed they'd prefer a tool that didn't require coding proficiency (45 responses).</p>
+      </div>
+    </div>
     <div class="pull-quote">
       "I don't create Smartbuttons from scratch — I only edit existing ones, because I don't
       know where to start."
@@ -328,10 +341,8 @@ a { color: var(--accent); text-underline-offset: 0.2em; }
       customer-facing staff used the real thing and reported back.
     </p>
     <div class="figure">
-      <div class="cover-placeholder" style="aspect-ratio:16/10;">
-        <p><span class="tag">Image placeholder</span>Wireframe — early exploration of the step-builder canvas</p>
-      </div>
-      <p class="figure__cap">Early wireframe exploration for the step-builder canvas.</p>
+      <img src="images/cloud-scripts-concept-wireframe.png" alt="Early conceptual wireframes mapping the admin and agent flows for the script distribution and editing tool, with design annotations.">
+      <p class="figure__cap">Early conceptual wireframes mapping the admin (script creator) and agent (end user) flows.</p>
     </div>
   </section>
 
@@ -366,10 +377,8 @@ a { color: var(--accent); text-underline-offset: 0.2em; }
       like it had existed before.
     </p>
     <div class="figure">
-      <div class="cover-placeholder">
-        <p><span class="tag">Image placeholder</span>Screenshot — the error panel and collapsible canvas after the testing round</p>
-      </div>
-      <p class="figure__cap">The editor after the usability fixes: error panel, collapsible canvas, side-panel step builder.</p>
+      <img src="images/cloud-scripts-admin-settings.png" alt="The admin settings panel listing scripts with triggers, favorites, error counts, and edit/download/delete actions.">
+      <p class="figure__cap">The advanced settings area for admin-level script management.</p>
     </div>
   </section>
 
@@ -383,6 +392,10 @@ a { color: var(--accent); text-underline-offset: 0.2em; }
       get them added properly: the step header, the rounded add-step button, and the draggable
       step block all shipped into the shared library for other teams to use.
     </p>
+    <div class="figure">
+      <img src="images/cloud-scripts-design-system.png" alt="Design system documentation for the script editor: step block states, colors, drag targets and zoom controls.">
+      <p class="figure__cap">Step block states, colors, and drag-and-drop behavior, documented for the shared design system.</p>
+    </div>
   </section>
 
   <section class="wrap section">
