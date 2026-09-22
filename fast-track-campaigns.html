@@ -81,6 +81,21 @@ a { color: var(--accent); text-underline-offset: 0.2em; }
 
 .cover { aspect-ratio: 16/9; border-radius: 2px; margin-top: 2.5rem; }
 
+.cover-placeholder {
+  aspect-ratio: 16/9; border-radius: 2px; margin-top: 2.5rem;
+  border: 1px dashed var(--rule); background: var(--surface);
+  display: flex; align-items: center; justify-content: center;
+  text-align: center; padding: 1.5rem;
+}
+.cover-placeholder p {
+  margin: 0; max-width: 28ch; font-family: var(--sans);
+  font-size: 0.8125rem; color: var(--muted); line-height: 1.5;
+}
+.cover-placeholder .tag {
+  display: block; font-weight: 500; color: var(--ink); margin-bottom: 0.35rem;
+  text-transform: uppercase; letter-spacing: 0.04em; font-size: 0.6875rem;
+}
+
 /* Stat band */
 .stats {
   display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
@@ -171,7 +186,9 @@ a { color: var(--accent); text-underline-offset: 0.2em; }
       <div><dt>Team</dt><dd>Product, Engineering, Commercial, GTM</dd></div>
       <div><dt>Status</dt><dd>Shipped, early rollout</dd></div>
     </dl>
-    <div class="cover" style="background: linear-gradient(140deg,#1E4FD8,#F5A623);"></div>
+    <div class="cover-placeholder">
+      <p><span class="tag">Image placeholder</span>Cover — the Fast Track guided campaign setup flow</p>
+    </div>
   </section>
 
   <section class="wrap section">
@@ -249,6 +266,9 @@ a { color: var(--accent); text-underline-offset: 0.2em; }
     <div class="decision">
       <h4>Make Fast Track visible after launch</h4>
       <p>A distinct icon marks Fast Track campaigns in the campaign list, so advertisers recognize the mode they're in, retailers can monitor adoption, and product teams can compare Fast Track against Advanced campaigns.</p>
+    </div>
+    <div class="cover-placeholder">
+      <p><span class="tag">Image placeholder</span>Screenshot — the Fast Track flow next to Advanced Setup, showing the choice point</p>
     </div>
   </section>
 

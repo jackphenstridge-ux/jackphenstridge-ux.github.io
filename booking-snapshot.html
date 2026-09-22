@@ -81,6 +81,21 @@ a { color: var(--accent); text-underline-offset: 0.2em; }
 
 .cover { aspect-ratio: 16/9; border-radius: 2px; margin-top: 2.5rem; }
 
+.cover-placeholder {
+  aspect-ratio: 16/9; border-radius: 2px; margin-top: 2.5rem;
+  border: 1px dashed var(--rule); background: var(--surface);
+  display: flex; align-items: center; justify-content: center;
+  text-align: center; padding: 1.5rem;
+}
+.cover-placeholder p {
+  margin: 0; max-width: 28ch; font-family: var(--sans);
+  font-size: 0.8125rem; color: var(--muted); line-height: 1.5;
+}
+.cover-placeholder .tag {
+  display: block; font-weight: 500; color: var(--ink); margin-bottom: 0.35rem;
+  text-transform: uppercase; letter-spacing: 0.04em; font-size: 0.6875rem;
+}
+
 .section { padding-block: clamp(2.5rem, 7vh, 4.5rem); border-top: 1px solid var(--rule); }
 .section__label { font-family: var(--sans); font-size: 0.8125rem; font-weight: 500; color: var(--muted); margin: 0 0 1.1rem; }
 .section h2 { font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 400; letter-spacing: -0.015em; margin: 0 0 1.25rem; max-width: 26ch; }
@@ -153,7 +168,9 @@ a { color: var(--accent); text-underline-offset: 0.2em; }
       <div><dt>Product</dt><dd>Travelport, Smartpoint Cloud</dd></div>
       <div><dt>Timeline</dt><dd>Ongoing</dd></div>
     </dl>
-    <div class="cover" style="background: linear-gradient(140deg,#8A5B2E,#D9B27F);"></div>
+    <div class="cover-placeholder">
+      <p><span class="tag">Image placeholder</span>Cover — the Booking Snapshot summary view, showing status, alerts and quick links</p>
+    </div>
   </section>
 
   <section class="wrap section">
@@ -243,6 +260,9 @@ a { color: var(--accent); text-underline-offset: 0.2em; }
         <h3>Easier access to upsell</h3>
         <p>Direct links to seats, bags, upgrades, and trip insurance — surfaced at the natural moment, not buried.</p>
       </div>
+    </div>
+    <div class="cover-placeholder">
+      <p><span class="tag">Image placeholder</span>Screenshot — the persistent summary panel in context, replacing the old refresh-and-hunt workflow</p>
     </div>
   </section>
 

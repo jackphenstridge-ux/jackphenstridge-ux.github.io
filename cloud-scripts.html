@@ -119,6 +119,21 @@ a { color: var(--accent); text-underline-offset: 0.2em; }
   margin-top: 2.5rem;
 }
 
+.cover-placeholder {
+  aspect-ratio: 16/9; border-radius: 2px; margin-top: 2.5rem;
+  border: 1px dashed var(--rule); background: var(--surface);
+  display: flex; align-items: center; justify-content: center;
+  text-align: center; padding: 1.5rem;
+}
+.cover-placeholder p {
+  margin: 0; max-width: 28ch; font-family: var(--sans);
+  font-size: 0.8125rem; color: var(--muted); line-height: 1.5;
+}
+.cover-placeholder .tag {
+  display: block; font-weight: 500; color: var(--ink); margin-bottom: 0.35rem;
+  text-transform: uppercase; letter-spacing: 0.04em; font-size: 0.6875rem;
+}
+
 /* Body sections */
 .section { padding-block: clamp(2.5rem, 7vh, 4.5rem); border-top: 1px solid var(--rule); }
 .section__label {
@@ -237,7 +252,9 @@ a { color: var(--accent); text-underline-offset: 0.2em; }
       <div><dt>Team</dt><dd>Product, Engineering, Design Systems</dd></div>
       <div><dt>Timeline</dt><dd>Ongoing</dd></div>
     </dl>
-    <div class="cover" style="background: linear-gradient(140deg,#2E5B8A,#7FB0C9);"></div>
+    <div class="cover-placeholder">
+      <p><span class="tag">Image placeholder</span>Cover — the Cloud Scripts low-code editor</p>
+    </div>
   </section>
 
   <section class="wrap section">
@@ -311,7 +328,9 @@ a { color: var(--accent); text-underline-offset: 0.2em; }
       customer-facing staff used the real thing and reported back.
     </p>
     <div class="figure">
-      <div class="cover" style="aspect-ratio:16/10; background: linear-gradient(140deg,#8A5B2E,#D9B27F);"></div>
+      <div class="cover-placeholder" style="aspect-ratio:16/10;">
+        <p><span class="tag">Image placeholder</span>Wireframe — early exploration of the step-builder canvas</p>
+      </div>
       <p class="figure__cap">Early wireframe exploration for the step-builder canvas.</p>
     </div>
   </section>
@@ -346,6 +365,12 @@ a { color: var(--accent); text-underline-offset: 0.2em; }
       We also added an advanced settings area for admin-level script management, since nothing
       like it had existed before.
     </p>
+    <div class="figure">
+      <div class="cover-placeholder">
+        <p><span class="tag">Image placeholder</span>Screenshot — the error panel and collapsible canvas after the testing round</p>
+      </div>
+      <p class="figure__cap">The editor after the usability fixes: error panel, collapsible canvas, side-panel step builder.</p>
+    </div>
   </section>
 
   <section class="wrap section">
@@ -389,10 +414,10 @@ a { color: var(--accent); text-underline-offset: 0.2em; }
     </ul>
   </section>
 
-  <a class="wrap next-project" href="booking-snapshot.html">
+  <a class="wrap next-project" href="rotorcraft-hmi-evaluation.html">
     <div>
       <p class="next-project__label">Next project</p>
-      <p class="next-project__title">Booking Snapshot</p>
+      <p class="next-project__title">The Interface Between Pilot and Aircraft</p>
     </div>
     <span>→</span>
   </a>

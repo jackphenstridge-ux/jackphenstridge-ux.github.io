@@ -100,6 +100,21 @@ a { color: var(--accent); text-underline-offset: 0.2em; }
 
 .cover { aspect-ratio: 16/9; border-radius: 2px; margin-top: 2.5rem; }
 
+.cover-placeholder {
+  aspect-ratio: 16/9; border-radius: 2px; margin-top: 2.5rem;
+  border: 1px dashed var(--rule); background: var(--surface);
+  display: flex; align-items: center; justify-content: center;
+  text-align: center; padding: 1.5rem;
+}
+.cover-placeholder p {
+  margin: 0; max-width: 28ch; font-family: var(--sans);
+  font-size: 0.8125rem; color: var(--muted); line-height: 1.5;
+}
+.cover-placeholder .tag {
+  display: block; font-weight: 500; color: var(--ink); margin-bottom: 0.35rem;
+  text-transform: uppercase; letter-spacing: 0.04em; font-size: 0.6875rem;
+}
+
 /* Frame stat — the one number that matters, stated plainly up top */
 .frame-stat {
   max-width: var(--measure);
@@ -247,7 +262,9 @@ a { color: var(--accent); text-underline-offset: 0.2em; }
       <div><dt>Team</dt><dd>Product, Engineering, Commercial, Retailer Partnerships</dd></div>
       <div><dt>Timeline</dt><dd>2025–2026</dd></div>
     </dl>
-    <div class="cover" style="background: linear-gradient(140deg,#1E4FD8,#7FA0E0);"></div>
+    <div class="cover-placeholder">
+      <p><span class="tag">Image placeholder</span>Cover — CMax unified visibility across the three initiatives</p>
+    </div>
     <p class="frame-stat">
       Roughly <strong>70% of retail media spend</strong> flowed through retailer-sold channels
       that were largely invisible in the product — brands were reconstructing performance by
@@ -336,7 +353,9 @@ a { color: var(--accent); text-underline-offset: 0.2em; }
     </div>
 
     <div class="figure">
-      <div class="cover" style="aspect-ratio:16/9; background: linear-gradient(140deg,#3E6B4A,#A8C9A0);"></div>
+      <div class="cover-placeholder">
+        <p><span class="tag">Image placeholder</span>Screenshot — the account-linking and consent flow, alongside the unified campaign view</p>
+      </div>
       <p class="figure__cap">Account-linking and consent flow, alongside the unified campaign view.</p>
     </div>
 
@@ -418,6 +437,13 @@ a { color: var(--accent); text-underline-offset: 0.2em; }
       </div>
     </div>
 
+    <div class="figure">
+      <div class="cover-placeholder">
+        <p><span class="tag">Image placeholder</span>Screenshot — the authorized buyer activation flow, from retailer approval to campaign creation</p>
+      </div>
+      <p class="figure__cap">The activation path from retailer approval to a retailer-funded campaign.</p>
+    </div>
+
     <div class="section">
       <p class="section__label">Outcome</p>
       <p>
@@ -481,6 +507,13 @@ a { color: var(--accent); text-underline-offset: 0.2em; }
 
     <div class="pull-quote">
       The best cross-product experience is not always a fully unified interface. A clear handoff can be more trustworthy than a superficial visual merge.
+    </div>
+
+    <div class="figure">
+      <div class="cover-placeholder">
+        <p><span class="tag">Image placeholder</span>Screenshot — the account selector and same-tab handoff into the partner's environment</p>
+      </div>
+      <p class="figure__cap">The execution-environment choice, and the handoff into the partner's platform.</p>
     </div>
 
     <div class="section">
