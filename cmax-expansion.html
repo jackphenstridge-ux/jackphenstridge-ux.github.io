@@ -12,11 +12,11 @@
 
 <body>
 
-<header class="wrap masthead">
-  <a class="masthead__name" href="index.html">Jack Henstridge</a>
-  <nav class="masthead__nav">
-    <a href="index.html#work">Work</a>
-    <a href="about.html">About</a>
+<header class="masthead-bar">
+  <nav class="nav-pill">
+    <a href="index.html"><span class="key" aria-hidden="true">H</span>Home</a>
+    <a href="index.html#work" aria-current="page"><span class="key" aria-hidden="true">W</span>Work</a>
+    <a href="about.html"><span class="key" aria-hidden="true">A</span>About</a>
   </nav>
 </header>
 
@@ -24,21 +24,25 @@
 
   <section class="wrap case-header">
     <p class="case-header__eyebrow">Case study · Program of three connected initiatives</p>
-    <h1>CMax Expansion</h1>
-    <p class="case-header__sub">
-      Making fragmented retail media feel like one system — told through three connected
-      initiatives: visibility and trust, governance and activation, and cross-product
-      interoperability.
-    </p>
-    <dl class="meta-row">
-      <div><dt>Role</dt><dd>UX Owner, CMax Expansion</dd></div>
-      <div><dt>Team</dt><dd>Product, Engineering, Commercial, Retailer Partnerships</dd></div>
-      <div><dt>Timeline</dt><dd>2025–2026</dd></div>
-    </dl>
-    <div class="cover-placeholder">
+    <div class="case-header__main">
+      <h1>CMax Expansion</h1>
+      <p class="case-header__sub">
+        Making fragmented retail media feel like one system — told through three connected
+        initiatives: visibility and trust, governance and activation, and cross-product
+        interoperability.
+      </p>
+    </div>
+    <div class="summary-card case-header__full">
+      <dl class="meta-row">
+        <div><dt>Role</dt><dd>UX Owner, CMax Expansion</dd></div>
+        <div><dt>Team</dt><dd>Product, Engineering, Commercial, Retailer Partnerships</dd></div>
+        <div><dt>Timeline</dt><dd>2025–2026</dd></div>
+      </dl>
+    </div>
+    <div class="cover-placeholder case-header__full">
       <p><span class="tag">Image placeholder</span>Cover — CMax unified visibility across the three initiatives</p>
     </div>
-    <p class="frame-stat">
+    <p class="frame-stat case-header__full">
       Roughly <strong>70% of retail media spend</strong> flowed through retailer-sold channels
       that were largely invisible in the product — brands were reconstructing performance by
       hand across separate retailer platforms. This program existed to close that gap.
@@ -92,15 +96,20 @@
     </p>
 
     <h3>The key constraint</h3>
-    <div class="pull-quote">Agencies and brands don't automatically value a multi-retailer view.</div>
-    <p>
-      Budgets are planned retailer by retailer, so without clear cross-retailer insight, there's
-      little incentive to change established workflows.
-    </p>
-    <p>
-      Larger brands often staff a dedicated team per retailer. Smaller and long-tail advertisers
-      don't have that headcount and need something simpler and more scalable.
-    </p>
+    <div class="insight-row">
+      <div class="insight insight--emphasis">
+        <h4>Agencies and brands don't automatically value a multi-retailer view.</h4>
+      </div>
+      <div class="insight">
+        <h4>Budgets are planned retailer by retailer</h4>
+        <p>
+          Without clear cross-retailer insight, there's little incentive to change established
+          workflows. Larger brands often staff a dedicated team per retailer; smaller and
+          long-tail advertisers don't have that headcount and need something simpler and more
+          scalable.
+        </p>
+      </div>
+    </div>
     <p>
       That made reducing operational effort while making value visible the central design
       problem, not a secondary feature.

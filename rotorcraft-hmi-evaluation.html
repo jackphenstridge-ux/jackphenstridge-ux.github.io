@@ -12,11 +12,11 @@
 
 <body>
 
-<header class="wrap masthead">
-  <a class="masthead__name" href="index.html">Jack Henstridge</a>
-  <nav class="masthead__nav">
-    <a href="index.html#work">Work</a>
-    <a href="about.html">About</a>
+<header class="masthead-bar">
+  <nav class="nav-pill">
+    <a href="index.html"><span class="key" aria-hidden="true">H</span>Home</a>
+    <a href="index.html#work" aria-current="page"><span class="key" aria-hidden="true">W</span>Work</a>
+    <a href="about.html"><span class="key" aria-hidden="true">A</span>About</a>
   </nav>
 </header>
 
@@ -24,23 +24,27 @@
 
   <section class="wrap case-header">
     <p class="case-header__eyebrow">Case study · Defence</p>
-    <h1>The interface between pilot and aircraft</h1>
-    <p class="case-header__sub">
-      A test-and-evaluation programme for a new military rotorcraft's cockpit and mission
-      systems — assessing how pilots, aircrew, and the aircraft's own systems would actually
-      work together in the air, not just on paper.
-    </p>
-    <dl class="meta-row">
-      <div><dt>Role</dt><dd>HMI Engineer — Avionics &amp; Mission Systems</dd></div>
-      <div><dt>Team</dt><dd>Test pilots &amp; aircrew, manufacturer SMEs, MoD stakeholders, systems engineers, project management, ground &amp; radio equipment operators</dd></div>
-      <div><dt>Status</dt><dd>Delivered — findings fed into the aircraft's evaluation sign-off</dd></div>
-    </dl>
-    <p class="disclaimer">
+    <div class="case-header__main">
+      <h1>The interface between pilot and aircraft</h1>
+      <p class="case-header__sub">
+        A test-and-evaluation programme for a new military rotorcraft's cockpit and mission
+        systems — assessing how pilots, aircrew, and the aircraft's own systems would actually
+        work together in the air, not just on paper.
+      </p>
+    </div>
+    <div class="summary-card case-header__full">
+      <dl class="meta-row">
+        <div><dt>Role</dt><dd>HMI Engineer — Avionics &amp; Mission Systems</dd></div>
+        <div><dt>Team</dt><dd>Test pilots &amp; aircrew, manufacturer SMEs, MoD stakeholders, systems engineers, project management, ground &amp; radio equipment operators</dd></div>
+        <div><dt>Status</dt><dd>Delivered — findings fed into the aircraft's evaluation sign-off</dd></div>
+      </dl>
+    </div>
+    <p class="disclaimer case-header__full">
       <strong>A note on this case study:</strong> this was a classified defence programme. The
       aircraft, its systems, and the testing results themselves can't be shared. What follows
       describes my role, the team, the process, and the high-level outcome only.
     </p>
-    <div class="cover-placeholder">
+    <div class="cover-placeholder case-header__full">
       <p><span class="tag">Image placeholder</span>Cover — a generic, non-programme-specific image (e.g. a stock cockpit or rotorcraft photo). Nothing platform-identifying.</p>
     </div>
   </section>

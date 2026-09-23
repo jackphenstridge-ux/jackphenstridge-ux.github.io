@@ -7,14 +7,18 @@
 
 /* ---------------------------------------------------------------
    1. TOKENS
+   Single dark palette — this is the site's only theme, not a
+   toggleable variant. --surface and --rule are derived tones from
+   --ground; --muted is a blend of --ink and --ground tuned to stay
+   above 4.5:1 contrast against --ground for small text.
    --------------------------------------------------------------- */
 :root {
-  --ground:  #E9EAE4;   /* page background */
-  --surface: #F4F5F0;   /* slightly lifted panels */
-  --ink:     #1A1D1C;   /* main text */
-  --muted:   #5F6461;   /* secondary text */
-  --rule:    #C7C9C0;   /* hairlines between rows */
-  --accent:  #1E4FD8;   /* links only — used sparingly on purpose */
+  --ground:  #37363C;   /* page background */
+  --surface: #403F46;   /* lifted panels — cards, framed images, nav pill */
+  --rule:    #4C4B54;   /* hairlines / borders, a touch lighter than surface */
+  --ink:     #F0F1F3;   /* main text — ~10.6:1 against ground */
+  --muted:   #A9A8AD;   /* secondary text — ~5.2:1 against ground */
+  --accent:  #8BB1C8;   /* links/emphasis — ~5.3:1 against ground */
 
   --measure: 34rem;     /* max line length for reading text */
   --page:    76rem;     /* max width of the whole layout */
@@ -23,18 +27,6 @@
   --serif: "Newsreader", Georgia, "Times New Roman", serif;
   --sans:  "IBM Plex Sans", system-ui, -apple-system, sans-serif;
   --mono:  ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
-}
-
-/* Dark mode keeps the same identity, just inverted. */
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    --ground: #15181A; --surface: #1D2124; --ink: #E8E9E3;
-    --muted: #969C97;  --rule: #343A3C;    --accent: #8FA9FF;
-  }
-}
-:root[data-theme="dark"] {
-  --ground: #15181A; --surface: #1D2124; --ink: #E8E9E3;
-  --muted: #969C97;  --rule: #343A3C;    --accent: #8FA9FF;
 }
 
 /* ---------------------------------------------------------------
@@ -72,43 +64,71 @@ code { font-family: var(--mono); font-size: 0.85em; }
 
 /* ---------------------------------------------------------------
    3. HEADER
+   Sticky, centered pill nav with letter-shortcut badges.
    --------------------------------------------------------------- */
-.masthead {
+.masthead-bar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
   display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-  gap: 1.5rem;
-  padding-block: 1.75rem;
+  justify-content: center;
+  padding-block: 1.5rem;
+}
+
+.nav-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  background: rgba(64, 63, 70, 0.88);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 999px;
+  padding: 0.4rem;
   font-family: var(--sans);
   font-size: 0.875rem;
 }
 
-.masthead__name {
-  font-weight: 500;
-  letter-spacing: -0.01em;
-  color: var(--ink);
+.nav-pill a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.45rem 0.85rem;
+  border-radius: 999px;
+  color: var(--muted);
   text-decoration: none;
+  transition: color 150ms ease, background-color 150ms ease;
 }
 
-.masthead__nav { display: flex; gap: 1.5rem; }
-.masthead__nav a { color: var(--muted); text-decoration: none; }
-.masthead__nav a:hover { color: var(--ink); }
+.nav-pill a:hover { color: var(--ink); }
+.nav-pill a[aria-current="page"] { color: var(--ink); background: rgba(255, 255, 255, 0.07); }
+
+.nav-pill .key {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.1rem;
+  height: 1.1rem;
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+  font-size: 0.625rem;
+  color: var(--muted);
+}
 
 /* ---------------------------------------------------------------
-   4. OPENING STATEMENT (homepage / about)
+   4. OPENING STATEMENT (homepage)
+   Left-aligned: bold headline, a clearly secondary subtext, and a
+   closing identity line — borrowed from Jack's previous portfolio.
    --------------------------------------------------------------- */
 .opening {
-  padding-block: clamp(4rem, 14vh, 9rem) clamp(3rem, 9vh, 6rem);
+  padding-block: clamp(4rem, 14vh, 8rem) clamp(3rem, 9vh, 6rem);
 }
 
-.opening p {
+.opening__headline {
   margin: 0;
-  max-width: 22ch;
-  font-size: clamp(2.5rem, 7vw, 4.25rem);
-  line-height: 1.08;
-  letter-spacing: -0.025em;
-  font-weight: 300;
-  text-wrap: balance;
+  font-size: clamp(1.75rem, 4vw, 2.5rem);
+  line-height: 1.25;
+  letter-spacing: -0.015em;
+  font-weight: 500;
 }
 
 .opening em {
@@ -117,16 +137,27 @@ code { font-family: var(--mono); font-size: 0.85em; }
 }
 
 .opening__sub {
-  margin-top: 2rem;
-  max-width: var(--measure);
+  margin-top: 1.5rem;
+  max-width: 34ch;
   color: var(--muted);
-  font-size: 1.0625rem;
-  line-height: 1.65;
+  font-size: clamp(1.75rem, 4vw, 2.5rem);
+  line-height: 1.25;
+  letter-spacing: -0.015em;
+  font-weight: 300;
+}
+
+.opening__identity {
+  margin-top: 2.75rem;
+  font-size: 1.25rem;
+  font-weight: 500;
+  letter-spacing: -0.005em;
 }
 
 /* ---------------------------------------------------------------
    5. WORK INDEX (homepage)
-   Rows, not cards. Hovering a row previews the work.
+   Image-led tile grid. Hovering a tile brightens it and dims its
+   siblings — pure CSS, no JS. Tiles without a supplied cover image
+   fall back to a flat surface panel so the grid never looks broken.
    --------------------------------------------------------------- */
 .section-head {
   font-family: var(--sans);
@@ -136,67 +167,66 @@ code { font-family: var(--mono); font-size: 0.85em; }
   margin: 0 0 0.75rem;
 }
 
-.index { border-top: 1px solid var(--rule); }
+#work { padding-bottom: clamp(3rem, 8vh, 5rem); }
 
-.entry {
+.work-grid {
   display: grid;
-  grid-template-columns: 1fr auto;
-  gap: 0.25rem 2rem;
-  align-items: baseline;
-  padding-block: 1.6rem;
-  border-bottom: 1px solid var(--rule);
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+  margin-top: 1.75rem;
+}
+
+@media (max-width: 700px) {
+  .work-grid { grid-template-columns: 1fr; }
+}
+
+.tile {
+  display: block;
   text-decoration: none;
   color: inherit;
-  transition: padding-inline-start 180ms ease, background-color 180ms ease;
-}
-
-.entry:hover, .entry:focus-visible {
-  padding-inline-start: 0.75rem;
+  border-radius: 10px;
+  overflow: hidden;
   background: var(--surface);
+  transition: opacity 220ms ease, transform 220ms ease;
 }
 
-.entry__title {
-  font-size: clamp(1.4rem, 3.2vw, 2rem);
+.tile__media {
+  aspect-ratio: 4/3;
+  background: var(--surface) center/cover no-repeat;
+}
+
+.tile__body { padding: 1.25rem 1.5rem 1.5rem; }
+
+.tile__title {
+  font-size: 1.375rem;
   line-height: 1.2;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.015em;
   font-weight: 400;
-  margin: 0;
+  margin: 0 0 0.4rem;
 }
 
-.entry__meta {
+.tile__meta {
   font-family: var(--sans);
-  font-size: 0.8125rem;
+  font-size: 0.75rem;
   color: var(--muted);
-  white-space: nowrap;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
 }
 
-.entry__note {
-  grid-column: 1 / -1;
-  max-width: var(--measure);
+.tile__note {
+  margin: 0.6rem 0 0;
   color: var(--muted);
   font-size: 0.9375rem;
-  margin: 0.35rem 0 0;
+  line-height: 1.5;
 }
 
-/* Cursor-following preview. Decorative, so hidden from screen
-   readers and disabled on touch devices and reduced-motion. */
-#preview {
-  position: fixed;
-  top: 0; left: 0;
-  width: 240px; height: 165px;
-  border-radius: 2px;
-  pointer-events: none;
-  opacity: 0;
-  z-index: 50;
-  transform: translate(-50%, -50%);
-  transition: opacity 160ms ease;
-  box-shadow: 0 12px 40px rgb(0 0 0 / 0.18);
+@media (hover: hover) {
+  .work-grid:hover .tile { opacity: 0.5; }
+  .work-grid:hover .tile:hover { opacity: 1; transform: translateY(-2px); }
 }
-#preview.is-visible { opacity: 1; }
 
-@media (hover: none), (prefers-reduced-motion: reduce) {
-  #preview { display: none; }
-  .entry { transition: none; }
+@media (prefers-reduced-motion: reduce) {
+  .tile { transition: none; }
 }
 
 /* ---------------------------------------------------------------
@@ -269,9 +299,19 @@ code { font-family: var(--mono); font-size: 0.85em; }
 
 /* ---------------------------------------------------------------
    7. CASE STUDY — HEADER
+   Two-column: project name/eyebrow on the left, headline+sub on the
+   right, collapsing to stacked below 720px. Everything after the
+   headline block (.case-header__full items) spans both columns.
    --------------------------------------------------------------- */
-.case-header { padding-block: clamp(3rem, 10vh, 6rem) clamp(2rem, 6vh, 3.5rem); }
-.case-header__eyebrow { font-family: var(--sans); font-size: 0.8125rem; color: var(--muted); margin: 0 0 1rem; }
+.case-header {
+  padding-block: clamp(3rem, 10vh, 6rem) clamp(2rem, 6vh, 3.5rem);
+  display: grid;
+  grid-template-columns: minmax(120px, 200px) 1fr;
+  column-gap: 2rem;
+  row-gap: 1.5rem;
+}
+.case-header__eyebrow { font-family: var(--sans); font-size: 0.8125rem; color: var(--muted); margin: 0.4rem 0 0; }
+.case-header__main { min-width: 0; }
 .case-header h1 {
   font-size: clamp(2.25rem, 6vw, 3.5rem);
   line-height: 1.1;
@@ -280,7 +320,23 @@ code { font-family: var(--mono); font-size: 0.85em; }
   margin: 0 0 1rem;
   max-width: 22ch;
 }
-.case-header__sub { max-width: var(--measure); color: var(--muted); font-size: 1.125rem; margin: 0 0 2rem; }
+.case-header__sub { max-width: var(--measure); color: var(--muted); font-size: 1.125rem; margin: 0; }
+
+.case-header__full { grid-column: 1 / -1; }
+
+@media (max-width: 720px) {
+  .case-header { grid-template-columns: 1fr; }
+}
+
+/* Summary card — wraps the meta-row in a lifted panel rather than
+   leaving it bare on the page background. */
+.summary-card {
+  background: var(--surface);
+  border-radius: 14px;
+  padding: 1.5rem 1.75rem;
+  margin-top: 1.5rem;
+}
+.summary-card .meta-row { border-top: 0; padding-top: 0; }
 
 .meta-row {
   display: flex;
@@ -294,11 +350,21 @@ code { font-family: var(--mono); font-size: 0.85em; }
 .meta-row dt { color: var(--muted); margin: 0; }
 .meta-row dd { margin: 0.15rem 0 0; font-weight: 500; }
 
+/* Cover frame — a padded surface panel around a real cover image,
+   giving it a "device frame" feel instead of bleeding to its edges. */
+.cover-frame {
+  background: var(--surface);
+  border-radius: 16px;
+  padding: 1rem;
+  margin-top: 2rem;
+}
+.cover-frame .cover { margin-top: 0; }
+
 /* Cover image — real photo/screenshot. width/object-fit make it crop
    to the aspect ratio regardless of the source image's own proportions. */
 .cover {
   aspect-ratio: 16/9;
-  border-radius: 2px;
+  border-radius: 8px;
   margin-top: 2.5rem;
   width: 100%;
   object-fit: cover;
@@ -441,9 +507,33 @@ code { font-family: var(--mono); font-size: 0.85em; }
   .gate-arrow { display: none; }
 }
 
-.figure { margin: 2rem 0; }
-.figure img { width: 100%; object-fit: cover; background: var(--surface); }
-.figure__cap { font-family: var(--sans); font-size: 0.8125rem; color: var(--muted); margin-top: 0.6rem; }
+.figure {
+  margin: 2rem 0;
+  background: var(--surface);
+  border-radius: 14px;
+  padding: 1rem;
+}
+.figure img { width: 100%; object-fit: cover; background: var(--surface); border-radius: 8px; }
+.figure__cap { font-family: var(--sans); font-size: 0.8125rem; color: var(--muted); margin: 0.75rem 0.25rem 0; }
+
+/* Insight row — 2–3 cards, with the option to emphasize the single
+   most important one via a solid accent fill. Used selectively where
+   a section has one standout point, not on every card grid. */
+.insight-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.5rem;
+  margin: 1.75rem 0;
+}
+.insight {
+  background: var(--surface);
+  border-radius: 10px;
+  padding: 1.5rem 1.75rem;
+}
+.insight h4 { font-family: var(--sans); font-size: 0.9375rem; font-weight: 500; margin: 0 0 0.5rem; }
+.insight p { font-size: 0.9375rem; color: var(--muted); margin: 0; max-width: none; }
+.insight--emphasis { background: var(--accent); }
+.insight--emphasis h4, .insight--emphasis p { color: var(--ground); }
 
 .pull-quote {
   max-width: var(--measure);

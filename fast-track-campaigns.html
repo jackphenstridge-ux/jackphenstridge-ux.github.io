@@ -12,11 +12,11 @@
 
 <body>
 
-<header class="wrap masthead">
-  <a class="masthead__name" href="index.html">Jack Henstridge</a>
-  <nav class="masthead__nav">
-    <a href="index.html#work">Work</a>
-    <a href="about.html">About</a>
+<header class="masthead-bar">
+  <nav class="nav-pill">
+    <a href="index.html"><span class="key" aria-hidden="true">H</span>Home</a>
+    <a href="index.html#work" aria-current="page"><span class="key" aria-hidden="true">W</span>Work</a>
+    <a href="about.html"><span class="key" aria-hidden="true">A</span>About</a>
   </nav>
 </header>
 
@@ -24,17 +24,21 @@
 
   <section class="wrap case-header">
     <p class="case-header__eyebrow">Case study</p>
-    <h1>Fast Track Campaigns</h1>
-    <p class="case-header__sub">
-      Making campaign creation fast, clear, and accessible for smaller brands and marketplace
-      sellers — cutting median launch time from 35 minutes to 5, without a full platform rebuild.
-    </p>
-    <dl class="meta-row">
-      <div><dt>Role</dt><dd>UX Lead, discovery through rollout</dd></div>
-      <div><dt>Team</dt><dd>Product, Engineering, Commercial, GTM</dd></div>
-      <div><dt>Status</dt><dd>Shipped, early rollout</dd></div>
-    </dl>
-    <div class="cover-placeholder">
+    <div class="case-header__main">
+      <h1>Fast Track Campaigns</h1>
+      <p class="case-header__sub">
+        Making campaign creation fast, clear, and accessible for smaller brands and marketplace
+        sellers — cutting median launch time from 35 minutes to 5, without a full platform rebuild.
+      </p>
+    </div>
+    <div class="summary-card case-header__full">
+      <dl class="meta-row">
+        <div><dt>Role</dt><dd>UX Lead, discovery through rollout</dd></div>
+        <div><dt>Team</dt><dd>Product, Engineering, Commercial, GTM</dd></div>
+        <div><dt>Status</dt><dd>Shipped, early rollout</dd></div>
+      </dl>
+    </div>
+    <div class="cover-placeholder case-header__full">
       <p><span class="tag">Image placeholder</span>Cover — the Fast Track guided campaign setup flow</p>
     </div>
   </section>

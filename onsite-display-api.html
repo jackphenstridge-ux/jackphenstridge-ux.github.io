@@ -12,11 +12,11 @@
 
 <body>
 
-<header class="wrap masthead">
-  <a class="masthead__name" href="index.html">Jack Henstridge</a>
-  <nav class="masthead__nav">
-    <a href="index.html#work">Work</a>
-    <a href="about.html">About</a>
+<header class="masthead-bar">
+  <nav class="nav-pill">
+    <a href="index.html"><span class="key" aria-hidden="true">H</span>Home</a>
+    <a href="index.html#work" aria-current="page"><span class="key" aria-hidden="true">W</span>Work</a>
+    <a href="about.html"><span class="key" aria-hidden="true">A</span>About</a>
   </nav>
 </header>
 
@@ -24,19 +24,23 @@
 
   <section class="wrap case-header">
     <p class="case-header__eyebrow">Case study · Retail media</p>
-    <h1>Onsite Display API</h1>
-    <p class="case-header__sub">
-      Retailers wanted to run display campaigns from their own systems. That meant shipping a
-      product with no screens — where the statuses, the error shapes, and the order you're allowed
-      to build in <em>are</em> the design.
-    </p>
-    <dl class="meta-row">
-      <div><dt>Role</dt><dd>End-to-end UX owner, sole designer</dd></div>
-      <div><dt>Team</dt><dd>Product, Engineering, Technical Writing, GTM</dd></div>
-      <div><dt>Status</dt><dd>Pre-launch — guide drafted, API experimental</dd></div>
-    </dl>
+    <div class="case-header__main">
+      <h1>Onsite Display API</h1>
+      <p class="case-header__sub">
+        Retailers wanted to run display campaigns from their own systems. That meant shipping a
+        product with no screens — where the statuses, the error shapes, and the order you're allowed
+        to build in <em>are</em> the design.
+      </p>
+    </div>
+    <div class="summary-card case-header__full">
+      <dl class="meta-row">
+        <div><dt>Role</dt><dd>End-to-end UX owner, sole designer</dd></div>
+        <div><dt>Team</dt><dd>Product, Engineering, Technical Writing, GTM</dd></div>
+        <div><dt>Status</dt><dd>Pre-launch — guide drafted, API experimental</dd></div>
+      </dl>
+    </div>
 
-    <div class="fragment">
+    <div class="fragment case-header__full">
       <div class="fragment-head">
         <span class="verb">POST</span>
         <span class="route">/line-items</span>
@@ -60,7 +64,7 @@
       </p>
     </div>
 
-    <p class="disclaimer">
+    <p class="disclaimer case-header__full">
       <strong>A note on this case study:</strong> this product has not yet publicly launched.
       Specific contract details, commercial figures, and internal process detail have been
       withheld or generalized below, and will be updated once the API is publicly released.
