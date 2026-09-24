@@ -33,6 +33,11 @@
    --------------------------------------------------------------- */
 *, *::before, *::after { box-sizing: border-box; }
 
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+}
+
 body {
   margin: 0;
   background: var(--ground);
@@ -63,67 +68,54 @@ code { font-family: var(--mono); font-size: 0.85em; }
 
 /* ---------------------------------------------------------------
    3. HEADER
-   Sticky, centered pill nav with letter-shortcut badges.
+   Standard header in normal flow: name on the left (home link),
+   pill-shaped links on the right.
    --------------------------------------------------------------- */
-.masthead-bar {
-  position: sticky;
-  top: 0;
-  z-index: 100;
+.site-header {
   display: flex;
-  justify-content: center;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.75rem 1.5rem;
   padding-block: 1.5rem;
 }
 
-.nav-pill {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.25rem;
-  background: rgba(64, 63, 70, 0.88);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border-radius: 999px;
-  padding: 0.4rem;
-  font-family: var(--font);
+.site-header__name {
+  color: var(--ink);
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  text-decoration: none;
+}
+
+.site-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
   font-size: 0.875rem;
 }
 
-.nav-pill a {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.45rem;
-  padding: 0.45rem 0.85rem;
+.site-nav a {
+  padding: 0.45rem 0.95rem;
   border-radius: 999px;
   color: var(--muted);
   text-decoration: none;
   transition: color 150ms ease, background-color 150ms ease;
 }
 
-.nav-pill a:hover { color: var(--ink); }
-.nav-pill a[aria-current="page"] { color: var(--ink); background: rgba(255, 255, 255, 0.07); }
-
-.nav-pill .key {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 1.1rem;
-  height: 1.1rem;
-  border: 1px solid var(--rule);
-  border-radius: 4px;
-  font-size: 0.625rem;
-  color: var(--muted);
-}
+.site-nav a:hover,
+.site-nav a[aria-current="page"] { color: var(--ink); background: var(--surface); }
 
 /* ---------------------------------------------------------------
-   4. OPENING STATEMENT (homepage)
+   4. OPENING STATEMENT (homepage + About hero)
    A design-tool "selection" motif: a layer-name tag and code chip
    above a dark box with a blue selection outline and corner handles.
    --------------------------------------------------------------- */
 .opening {
-  --selection: #2F7BF5;   /* design-tool selection blue, separate from --accent */
   padding-block: clamp(4rem, 14vh, 8rem) clamp(3rem, 9vh, 6rem);
 }
 
 .selection {
+  --selection: #2F7BF5;   /* design-tool selection blue, separate from --accent */
   width: fit-content;
   max-width: 100%;
 }
@@ -198,6 +190,17 @@ code { font-family: var(--mono); font-size: 0.85em; }
 }
 
 .highlight { color: var(--accent); font-weight: 600; }
+.accent { color: var(--accent); }
+
+/* Larger accent line — the About hero's "Product Designer". */
+.opening__display {
+  margin: 1.1em 0 0;
+  font-size: clamp(2.25rem, 5.5vw, 3.25rem);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  font-weight: 400;
+  color: var(--accent);
+}
 
 /* ---------------------------------------------------------------
    5. WORK INDEX (homepage)
@@ -330,6 +333,8 @@ code { font-family: var(--mono); font-size: 0.85em; }
   margin-bottom: 0.15rem;
 }
 
+/* "Get in touch" row — the About page's #contact section and the
+   footer on every other page. */
 .contact {
   border-top: 1px solid var(--rule);
   padding-block: 2.5rem 4rem;
@@ -677,7 +682,7 @@ code { font-family: var(--mono); font-size: 0.85em; }
 }
 
 /* ---------------------------------------------------------------
-   10. NEXT PROJECT + FOOTER
+   10. NEXT PROJECT
    --------------------------------------------------------------- */
 .next-project {
   border-top: 1px solid var(--rule); padding-block: clamp(3rem, 8vh, 5rem);
@@ -688,4 +693,3 @@ code { font-family: var(--mono); font-size: 0.85em; }
 .next-project__title { font-size: clamp(1.5rem, 4vw, 2.25rem); font-weight: 400; margin: 0.4rem 0 0; }
 .next-project:hover .next-project__title { color: var(--accent); }
 
-.footer { border-top: 1px solid var(--rule); padding-block: 2.5rem 4rem; font-family: var(--font); font-size: 0.875rem; color: var(--muted); }
