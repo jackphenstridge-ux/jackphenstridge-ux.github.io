@@ -40,8 +40,8 @@
         <div><dt>Timeline</dt><dd>Ongoing</dd></div>
       </dl>
     </div>
-    <div class="cover-placeholder case-header__full">
-      <p><span class="tag">Image placeholder</span>Cover — the Booking Snapshot summary view, showing status, alerts and quick links</p>
+    <div class="cover-frame case-header__full">
+      <img class="cover" src="images/booking-snapshot-cover.png" alt="Smartpoint Cloud on a laptop, with the Booking Snapshot popover open over a booking file showing flights, a schedule-change alert, and quick actions.">
     </div>
   </section>
 
@@ -66,12 +66,9 @@
   <section class="wrap section">
     <p class="section__label">Who this was for</p>
     <h2>Built for novice agents, useful to everyone</h2>
-    <div class="persona">
-      <div class="persona__badge"></div>
-      <div>
-        <p class="persona__name">Nicole, the novice</p>
-        <p class="persona__desc">One of Smartpoint's core personas — new to the system, unfamiliar with its legacy command language, needing to service complex bookings without months of training first.</p>
-      </div>
+    <div class="figure">
+      <img src="images/booking-snapshot-persona.png" alt="Persona sheet for Nicole the Novice Agent: new to the travel industry, frustrated by complicated procedures and archaic software, and needing modern graphical tools and automation.">
+      <p class="figure__cap">Nicole, the novice agent — one of Smartpoint's core personas.</p>
     </div>
     <p>
       Snapshot's primary goal was letting novice agents access and service complex bookings
@@ -91,6 +88,10 @@
       as the visual aid: four sessions, roughly 60 minutes each, with participants suggested by
       their account managers.
     </p>
+    <div class="figure">
+      <img src="images/booking-snapshot-prototype-feedback.png" alt="A snippet from the research prototype: a hotel-stays menu warning of a gap in nights at a hotel, with a participant quote saying they liked that it wasn't overly intrusive but told them they'd forgotten something.">
+      <p class="figure__cap">A prototype snippet used in the interviews, and how one participant reacted to its alerts.</p>
+    </div>
     <p>
       Feedback on the initial concept was positive — participants specifically valued visibility
       into ticketing alerts and dates, quick access to seat status, and traveler details like
@@ -105,6 +106,10 @@
       the current booking, system and custom alerts, and quick access to commonly needed extras
       like seats, bags, and upgrades.
     </p>
+    <div class="figure">
+      <img src="images/booking-snapshot-story-map.png" alt="Workshop board titled Booking File Snapshot, Determine MMP: how-might-we questions, the problems Snapshot could solve, and an agent journey map with notification ideas along each stage.">
+      <p class="figure__cap">The journey-mapping board used to narrow Snapshot down to a minimum marketable product.</p>
+    </div>
   </section>
 
   <section class="wrap section">
@@ -115,6 +120,10 @@
       it — the number of bookings and travelers, file and booking statuses, real-time alerts, and
       direct links into the areas of the file agents use most.
     </p>
+    <div class="figure">
+      <img src="images/booking-snapshot-wireframes.png" alt="Wireframes of the booking header before and after a booking is retrieved: counts per travelers, flights, hotels and cars, a booked-content summary, and the same summary with a ticketing time limit warning.">
+      <p class="figure__cap">Early wireframes: the header before retrieval, then the booked-content summary with and without an alert.</p>
+    </div>
     <div class="two-col">
       <div class="card">
         <h3>Instant overview</h3>
@@ -133,8 +142,9 @@
         <p>Direct links to seats, bags, upgrades, and trip insurance — surfaced at the natural moment, not buried.</p>
       </div>
     </div>
-    <div class="cover-placeholder">
-      <p><span class="tag">Image placeholder</span>Screenshot — the persistent summary panel in context, replacing the old refresh-and-hunt workflow</p>
+    <div class="figure">
+      <img src="images/booking-snapshot-popover.png" alt="Smartpoint Cloud booking file with the Flights summary popover open from the header, listing both American Airlines segments with Seats and Manage Reservation actions.">
+      <p class="figure__cap">The shipped Snapshot: a flights summary opened straight from the header, over the open booking file.</p>
     </div>
   </section>
 
@@ -148,6 +158,10 @@
       alerts surface. Clicking or hovering the badge opens the summary menus themselves, giving
       agents the most important booking details from wherever they are in the workflow.
     </p>
+    <div class="figure">
+      <img src="images/booking-snapshot-alert.png" alt="The Flights tab in the header showing an alert badge; its summary popover and the fare details panel both flag a schedule change on the American Airlines booking.">
+      <p class="figure__cap">An alert on the header badge: a schedule change flagged in both the summary menu and the booking itself.</p>
+    </div>
     <p>
       Between the first prototype test and this design, the platform underwent a full rebrand of
       its Atlas design system — meaning Snapshot's visual layer had to be rebuilt to match, on top
@@ -172,6 +186,13 @@
       reservation summaries actually useful, and what content mattered most when agents looked at a
       summary.
     </p>
+    <div class="figure">
+      <video controls preload="metadata" poster="images/booking-snapshot-app-view.png">
+        <source src="images/booking-snapshot-demo.mp4" type="video/mp4">
+        Your browser can't play this video.
+      </video>
+      <p class="figure__cap">The prototype demo walked through with users (about 2 minutes).</p>
+    </div>
     <p>Feedback from that round shaped several concrete changes:</p>
     <ul>
       <li>Adding control over alert frequency, rather than a single fixed behavior</li>
