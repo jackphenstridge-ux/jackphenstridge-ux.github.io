@@ -575,6 +575,18 @@ code { font-family: var(--mono); font-size: 0.85em; }
 .figure video { display: block; width: 100%; border-radius: 8px; background: var(--surface); }
 .figure__cap { font-family: var(--font); font-size: 0.8125rem; color: var(--muted); margin: 0.75rem 0.25rem 0; }
 
+/* Figure grid — a numbered sequence of screenshots, 2 per row. */
+.figure-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+  margin: 2rem 0;
+}
+.figure-grid .figure { margin: 0; }
+@media (max-width: 700px) {
+  .figure-grid { grid-template-columns: 1fr; }
+}
+
 /* Insight row — 2–3 cards, with the option to emphasize the single
    most important one via a solid accent fill. Used selectively where
    a section has one standout point, not on every card grid. */
