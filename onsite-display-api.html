@@ -121,25 +121,27 @@
       argued through with product and engineering. Each one is a genuine fork in the road, and the
       later ones depend on the earlier ones.
     </p>
-    <div class="decision">
-      <h4>Any order, not a wizard</h4>
-      <p>The UI enforced a sequence — finish one screen before the next unlocks. The API instead creates the line item first, then accepts configuration in any order, at any time.</p>
-      <p>This matches how integrating systems actually work. A client system may hold products, targets, and creative data in different services, available at different moments. A wizard forces it to buffer everything and replay it in our order.</p>
-    </div>
-    <div class="decision">
-      <h4>Reject the impossible; surface the temporary</h4>
-      <p>A configuration that can never work fails immediately at write time. A configuration that's valid but temporarily undeliverable is accepted and explained through a separate diagnostics step.</p>
-      <p>Without that split, an API either blocks people mid-build with conditional logic, or silently accepts things that will never actually deliver. Both are failures — they just fail at different times.</p>
-    </div>
-    <div class="decision">
-      <h4>Review status lives on the property, not the whole</h4>
-      <p>Approval is modeled at the level of the individual reviewable thing — each keyword, product, and creative carries its own status, rather than one rolled-up status for the entire line item.</p>
-      <p>A single status tells a client something is wrong but not what. Property-level state lets an integration show its own user exactly which two things were rejected, and leave the other forty alone.</p>
-    </div>
-    <div class="decision">
-      <h4>Review readiness is not delivery readiness</h4>
-      <p>Submitting for retailer review and being eligible to actually deliver are different gates. Configuration completeness, activation, funding, and retailer approval stay as separate concepts instead of collapsing into one lifecycle status.</p>
-      <p>This is the decision I'd defend hardest. Every platform is tempted to give clients one status field. It's always a lie by the second release, because the reasons something isn't live are independent of one another.</p>
+    <div class="decision-grid">
+      <div class="decision">
+        <h4>Any order, not a wizard</h4>
+        <p>The UI enforced a sequence — finish one screen before the next unlocks. The API instead creates the line item first, then accepts configuration in any order, at any time.</p>
+        <p>This matches how integrating systems actually work. A client system may hold products, targets, and creative data in different services, available at different moments. A wizard forces it to buffer everything and replay it in our order.</p>
+      </div>
+      <div class="decision">
+        <h4>Reject the impossible; surface the temporary</h4>
+        <p>A configuration that can never work fails immediately at write time. A configuration that's valid but temporarily undeliverable is accepted and explained through a separate diagnostics step.</p>
+        <p>Without that split, an API either blocks people mid-build with conditional logic, or silently accepts things that will never actually deliver. Both are failures — they just fail at different times.</p>
+      </div>
+      <div class="decision">
+        <h4>Review status lives on the property, not the whole</h4>
+        <p>Approval is modeled at the level of the individual reviewable thing — each keyword, product, and creative carries its own status, rather than one rolled-up status for the entire line item.</p>
+        <p>A single status tells a client something is wrong but not what. Property-level state lets an integration show its own user exactly which two things were rejected, and leave the other forty alone.</p>
+      </div>
+      <div class="decision">
+        <h4>Review readiness is not delivery readiness</h4>
+        <p>Submitting for retailer review and being eligible to actually deliver are different gates. Configuration completeness, activation, funding, and retailer approval stay as separate concepts instead of collapsing into one lifecycle status.</p>
+        <p>This is the decision I'd defend hardest. Every platform is tempted to give clients one status field. It's always a lie by the second release, because the reasons something isn't live are independent of one another.</p>
+      </div>
     </div>
   </section>
 
@@ -201,6 +203,24 @@
       <li>Naming what's out of scope, loudly and early.</li>
       <li>Flexible configuration with one readiness gate, kinder than conditional logic that blocks people mid-build.</li>
     </ul>
+    <div class="figure-grid">
+      <div class="figure">
+        <img src="images/onsite-display-api-flow-submit.png" alt="Flow: create the line item paused and add products, targets, creative and bidding; verify it with a GET until configuration is complete; submit for review; the retailer reviews it in the Line Item review center.">
+        <p class="figure__cap">Create and submit for review.</p>
+      </div>
+      <div class="figure">
+        <img src="images/onsite-display-api-flow-serve.png" alt="Happy path flow: create the line item, submit for review, approved by the retailer, then live and serving on all properties, with the status values expected at each step.">
+        <p class="figure__cap">The happy path to a line item that's fully live.</p>
+      </div>
+      <div class="figure">
+        <img src="images/onsite-display-api-flow-edit.png" alt="Flow: PATCH the line item; if the changes are reviewable it goes back to the retailer for review, otherwise the changes take effect directly.">
+        <p class="figure__cap">Editing a line item: only reviewable changes go back to the retailer.</p>
+      </div>
+      <div class="figure">
+        <img src="images/onsite-display-api-flow-not-serving.png" alt="Flow: a line item that isn't delivering fans out to four checks, paused state, configuration, retailer approval, and diagnostics, which all return reasons.">
+        <p class="figure__cap">When a line item isn't serving: four independent checks, each returning its own reason.</p>
+      </div>
+    </div>
   </section>
 
   <section class="wrap section">

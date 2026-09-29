@@ -244,6 +244,19 @@ code { font-family: var(--mono); font-size: 0.85em; }
   background: var(--surface) center/cover no-repeat;
 }
 
+/* Code tile — renders the API request instead of an image, for the
+   case study about a product with no screens. overflow: hidden keeps
+   the 4:3 shape when the code is taller than the tile on small screens. */
+.tile__media--code {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  overflow: hidden;
+  background: #1C1C1F;
+}
+.tile__media--code .fragment { margin: 0; width: 100%; max-width: 22rem; }
+
 .tile__body { padding: 1.25rem 1.5rem 1.5rem; }
 
 .tile__title {
@@ -538,6 +551,18 @@ code { font-family: var(--mono); font-size: 0.85em; }
 .decision h4 { font-family: var(--font); font-size: 0.9375rem; font-weight: 500; margin: 0 0 0.5rem; }
 .decision p { font-size: 0.9375rem; color: var(--muted); margin: 0 0 0.6rem; max-width: none; }
 .decision p:last-child { margin-bottom: 0; }
+
+/* Decision grid — decision cards 2 per row instead of stacked. */
+.decision-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+.decision-grid .decision { margin: 0; max-width: none; }
+@media (max-width: 700px) {
+  .decision-grid { grid-template-columns: 1fr; }
+}
 
 .two-col { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.5rem; max-width: none; }
 .two-col--bottom .figure {
