@@ -7,18 +7,18 @@
 
 /* ---------------------------------------------------------------
    1. TOKENS
-   Single dark palette — this is the site's only theme, not a
-   toggleable variant. --surface and --rule are derived tones from
-   --ground; --muted is a blend of --ink and --ground tuned to stay
-   above 4.5:1 contrast against --ground for small text.
+   Single light palette — this is the site's only theme, not a
+   toggleable variant. --surface is a step darker than --ground so
+   panels still read on the off-white page. Every text pairing below
+   stays above 4.5:1 for small text.
    --------------------------------------------------------------- */
 :root {
-  --ground:  #37363C;   /* page background */
-  --surface: #403F46;   /* lifted panels — cards, framed images, nav pill */
-  --rule:    #4C4B54;   /* hairlines / borders, a touch lighter than surface */
-  --ink:     #F0F1F3;   /* main text — ~10.6:1 against ground */
-  --muted:   #A9A8AD;   /* secondary text — ~5.2:1 against ground */
-  --accent:  #8BB1C8;   /* links/emphasis — ~5.3:1 against ground */
+  --ground:  #FAF9F6;   /* page background — soft warm off-white */
+  --surface: #F0EFEB;   /* panels — cards, framed images, nav pills */
+  --rule:    #DEDCD6;   /* hairlines / borders */
+  --ink:     #1F1E1C;   /* main text — 15.8:1 on ground */
+  --muted:   #5F5E5A;   /* secondary text — 6.2:1 on ground, 5.6:1 on surface */
+  --accent:  #3B6F8F;   /* links/emphasis, deep steel blue — 5.2:1 on ground, 4.7:1 on surface, white on it 5.5:1 */
 
   --measure: 34rem;     /* max line length for reading text */
   --page:    76rem;     /* max width of the whole layout */
@@ -80,12 +80,9 @@ code { font-family: var(--mono); font-size: 0.85em; }
   padding-block: 1.5rem;
 }
 
-.site-header__name {
-  color: var(--ink);
-  font-weight: 500;
-  letter-spacing: -0.01em;
-  text-decoration: none;
-}
+.site-header__logo { display: block; line-height: 0; }
+/* square corners — the global img rule would round them */
+.site-header__logo img { width: 40px; height: 40px; border-radius: 0; }
 
 .site-nav {
   display: flex;
@@ -108,7 +105,7 @@ code { font-family: var(--mono); font-size: 0.85em; }
 /* ---------------------------------------------------------------
    4. OPENING STATEMENT (homepage + About hero)
    A design-tool "selection" motif: a layer-name tag and code chip
-   above a dark box with a blue selection outline and corner handles.
+   above a white frame with a blue selection outline and corner handles.
    --------------------------------------------------------------- */
 .opening {
   padding-block: clamp(4rem, 14vh, 8rem) clamp(3rem, 9vh, 6rem);
@@ -128,7 +125,8 @@ code { font-family: var(--mono); font-size: 0.85em; }
 }
 
 .selection__name {
-  background: #1A1A1A;
+  background: #FFFFFF;
+  border: 1px solid var(--rule);
   color: var(--ink);
   font-size: 0.875rem;
   line-height: 1;
@@ -142,19 +140,20 @@ code { font-family: var(--mono); font-size: 0.85em; }
   justify-content: center;
   width: 2rem;
   height: 2rem;
-  background: #F5F5F5;
-  color: #555;
+  background: #FFFFFF;
+  border: 1px solid var(--rule);
+  color: var(--muted);
   font-family: var(--mono);
   font-size: 0.75rem;
   text-decoration: none;
   border-radius: 6px;
   transition: background-color 150ms ease;
 }
-.selection__code:hover { background: #FFFFFF; }
+.selection__code:hover { background: var(--surface); }
 
 .selection__box {
   position: relative;
-  background: #1C1C1F;
+  background: #FFFFFF;
   border: 1px solid var(--selection);
   padding: 1.5rem 1.5rem 2.25rem;
 }
@@ -246,7 +245,7 @@ code { font-family: var(--mono); font-size: 0.85em; }
 
 /* Code tile — renders the API request instead of an image, for the
    case study about a product with no screens. Styled like the designed
-   covers: a pastel backdrop with the dark code card centered and shadowed.
+   covers: a pastel backdrop with the code card centered and shadowed.
    overflow: hidden keeps the 2:1 shape; on narrow two-column widths the
    card is top-anchored so any clipping happens at the bottom, and it's
    unclipped when tiles stack on mobile. */
@@ -318,6 +317,31 @@ code { font-family: var(--mono); font-size: 0.85em; }
   line-height: 1.7;
 }
 .about__body p { margin: 0 0 1.25rem; }
+
+/* Bio + photos side by side; photos stack under the text on narrow screens. */
+.about__layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 30rem);
+  gap: clamp(1.5rem, 4vw, 3rem);
+  align-items: start;
+}
+@media (max-width: 860px) {
+  .about__layout { grid-template-columns: 1fr; }
+  .photo-grid { max-width: 30rem; }
+}
+
+/* Square crops, each anchored so Jack stays in frame. */
+.photo-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; }
+.photo-grid img {
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+  border-radius: 10px;
+  background: var(--surface);
+}
+.photo-grid img:nth-child(1) { object-position: center 40%; }
+.photo-grid img:nth-child(2) { object-position: 25% center; }
+.photo-grid img:nth-child(4) { object-position: center 60%; }
 
 .testimonials {
   padding-block: clamp(1rem, 4vh, 2rem) clamp(2rem, 6vh, 3rem);
