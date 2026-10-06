@@ -240,22 +240,38 @@ code { font-family: var(--mono); font-size: 0.85em; }
 }
 
 .tile__media {
-  aspect-ratio: 4/3;
+  aspect-ratio: 2/1;
   background: var(--surface) center/cover no-repeat;
 }
 
 /* Code tile — renders the API request instead of an image, for the
-   case study about a product with no screens. overflow: hidden keeps
-   the 4:3 shape when the code is taller than the tile on small screens. */
+   case study about a product with no screens. Styled like the designed
+   covers: a pastel backdrop with the dark code card centered and shadowed.
+   overflow: hidden keeps the 2:1 shape; on narrow two-column widths the
+   card is top-anchored so any clipping happens at the bottom, and it's
+   unclipped when tiles stack on mobile. */
 .tile__media--code {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 1.5rem;
+  padding: 1rem;
   overflow: hidden;
-  background: #1C1C1F;
+  background: #F5E6B3;   /* pastel butter yellow, alongside the other tiles' pastels */
 }
-.tile__media--code .fragment { margin: 0; width: 100%; max-width: 22rem; }
+.tile__media--code .fragment {
+  margin: 0;
+  width: 100%;
+  max-width: 22rem;
+  box-shadow: 0 12px 32px rgb(0 0 0 / 0.22);
+}
+.tile__media--code .fragment-head { padding: 0.5rem 0.9rem; }
+.tile__media--code .fragment-body pre { font-size: 0.75rem; line-height: 1.5; padding: 0.75rem 1rem; }
+@media (min-width: 701px) and (max-width: 1100px) {
+  .tile__media--code { align-items: flex-start; padding-bottom: 0; }
+}
+@media (max-width: 700px) {
+  .tile__media--code { aspect-ratio: auto; }
+}
 
 .tile__body { padding: 1.25rem 1.5rem 1.5rem; }
 
@@ -427,7 +443,7 @@ code { font-family: var(--mono); font-size: 0.85em; }
 /* Cover image — real photo/screenshot. width/object-fit make it crop
    to the aspect ratio regardless of the source image's own proportions. */
 .cover {
-  aspect-ratio: 16/9;
+  aspect-ratio: 2/1;
   border-radius: 8px;
   margin-top: 2.5rem;
   width: 100%;
@@ -437,7 +453,7 @@ code { font-family: var(--mono); font-size: 0.85em; }
 
 /* Cover placeholder — used until a real image is supplied for that slot */
 .cover-placeholder {
-  aspect-ratio: 16/9; border-radius: 2px; margin-top: 2.5rem;
+  aspect-ratio: 2/1; border-radius: 2px; margin-top: 2.5rem;
   border: 1px dashed var(--rule); background: var(--surface);
   display: flex; align-items: center; justify-content: center;
   text-align: center; padding: 1.5rem;
