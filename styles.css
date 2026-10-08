@@ -170,6 +170,21 @@ code { font-family: var(--mono); font-size: 0.85em; }
 .selection__handle--bl { bottom: 0; left: 0;  transform: translate(-50%, 50%); }
 .selection__handle--br { bottom: 0; right: 0; transform: translate(50%, 50%); }
 
+/* Drag a handle to resize the frame (see resize.js). Pointer-fine only, so
+   touch devices get no resize affordance and never fight page scrolling. */
+@media (pointer: fine) and (min-width: 701px) {
+  .selection__handle--tl, .selection__handle--br { cursor: nwse-resize; }
+  .selection__handle--tr, .selection__handle--bl { cursor: nesw-resize; }
+  /* 9px is too small to grab — extend the hit area to ~24px without
+     changing how the handle looks. */
+  .selection__handle::before {
+    content: "";
+    position: absolute;
+    inset: -8px;
+  }
+  .selection--dragging { user-select: none; }
+}
+
 .opening__headline,
 .opening__sub {
   font-size: clamp(1.75rem, 4vw, 2.5rem);
