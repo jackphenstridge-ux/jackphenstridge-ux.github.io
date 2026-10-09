@@ -454,6 +454,7 @@ code { font-family: var(--mono); font-size: 0.85em; }
   border-radius: 14px;
   padding: 1.5rem 1.75rem;
   margin-top: 1.5rem;
+  border: 1px solid var(--rule);
 }
 .summary-card .meta-row { border-top: 0; padding-top: 0; }
 
@@ -476,6 +477,7 @@ code { font-family: var(--mono); font-size: 0.85em; }
   border-radius: 16px;
   padding: 1rem;
   margin-top: 2rem;
+  border: 1px solid var(--rule);
 }
 .cover-frame .cover { margin-top: 0; }
 
@@ -602,6 +604,7 @@ code { font-family: var(--mono); font-size: 0.85em; }
   padding: 1.5rem 1.75rem;
   margin-bottom: 1rem;
   max-width: var(--measure);
+  border: 1px solid var(--rule);
 }
 .decision h4 { font-family: var(--font); font-size: 0.9375rem; font-weight: 500; margin: 0 0 0.5rem; }
 .decision p { font-size: 0.9375rem; color: var(--muted); margin: 0 0 0.6rem; max-width: none; }
@@ -619,15 +622,22 @@ code { font-family: var(--mono); font-size: 0.85em; }
   .decision-grid { grid-template-columns: 1fr; }
 }
 
-.two-col { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.5rem; max-width: none; }
+/* Always two columns: auto-fit squeezed in a third at some widths, leaving
+   a ragged last row. Every usage holds 2 or 4 items, so 2 always balances. */
+.two-col { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; max-width: none; }
+@media (max-width: 700px) {
+  .two-col { grid-template-columns: 1fr; }
+}
 .two-col--bottom .figure {
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
   height: 100%;
   margin: 0;
+  border: 1px solid var(--rule);
 }
-.card { background: var(--surface); border-radius: 3px; padding: 1.5rem; }
+.card { background: var(--surface); border-radius: 3px; padding: 1.5rem;   border: 1px solid var(--rule);
+}
 .card h3 { font-family: var(--font); font-size: 0.9375rem; font-weight: 500; margin: 0 0 0.6rem; }
 .card p, .card ul { font-size: 0.9375rem; color: var(--muted); margin: 0; max-width: none; }
 .card ul { padding-left: 1.1rem; }
@@ -635,7 +645,8 @@ code { font-family: var(--mono); font-size: 0.85em; }
 
 /* Two-gate model (Onsite Display API) */
 .gates { display: grid; grid-template-columns: 1fr auto 1fr; gap: 1.5rem; align-items: start; max-width: none; }
-.gate { background: var(--surface); border-radius: 3px; padding: 1.5rem; }
+.gate { background: var(--surface); border-radius: 3px; padding: 1.5rem;   border: 1px solid var(--rule);
+}
 .gate h4 { font-family: var(--font); font-size: 0.9375rem; font-weight: 500; margin: 0 0 0.3rem; }
 .gate-sub { font-size: 0.875rem; color: var(--muted); margin: 0 0 0.9rem; }
 .gate ul { padding-left: 1.1rem; margin: 0; font-size: 0.9375rem; }
@@ -651,7 +662,7 @@ code { font-family: var(--mono); font-size: 0.85em; }
   border-radius: 14px;
   padding: 1rem;
 }
-.figure img { width: 100%; object-fit: cover; background: var(--surface); border-radius: 8px; }
+.figure img { width: 100%; margin-inline: auto; object-fit: cover; background: var(--surface); border-radius: 8px; }
 .figure video { display: block; width: 100%; border-radius: 8px; background: var(--surface); }
 .figure__cap { font-family: var(--font); font-size: 0.8125rem; color: var(--muted); margin: 0.75rem 0.25rem 0; }
 
@@ -678,12 +689,16 @@ code { font-family: var(--mono); font-size: 0.85em; }
 }
 .insight {
   background: var(--surface);
+  /* On the light theme --surface is only a step off the page, so the plain
+     card needs a border to read as a card beside the filled one. */
+  border: 1px solid var(--rule);
   border-radius: 10px;
   padding: 1.5rem 1.75rem;
 }
 .insight h4 { font-family: var(--font); font-size: 0.9375rem; font-weight: 500; margin: 0 0 0.5rem; }
+.insight h4:last-child { margin-bottom: 0; }
 .insight p { font-size: 0.9375rem; color: var(--muted); margin: 0; max-width: none; }
-.insight--emphasis { background: var(--accent); }
+.insight--emphasis { background: var(--accent); border-color: var(--accent); }
 .insight--emphasis h4, .insight--emphasis p { color: var(--ground); }
 
 .pull-quote {

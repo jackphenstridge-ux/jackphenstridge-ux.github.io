@@ -78,6 +78,10 @@
       <li>Prototype sessions with several major international retailers</li>
       <li>Analysis of existing campaign workflows</li>
     </ul>
+    <div class="figure">
+      <img src="images/cmax-workshop.jpg" alt="A large workshop board, shown at low resolution so individual notes aren't readable: clusters of sticky notes grouping brand, platform and retailer pain points, with voting dots, above a row of proposed solutions.">
+      <p class="figure__cap">A workshop board from the discovery sessions: pain points grouped by brand, platform and retailer, voted on, then worked into candidate solutions. Shown deliberately low-resolution, since the notes carry internal detail and colleagues' names.</p>
+    </div>
 
     <h3>What users told us</h3>
     <p>
@@ -101,6 +105,10 @@
     <div class="insight-row">
       <div class="insight insight--emphasis">
         <h4>Agencies and brands don't automatically value a multi-retailer view.</h4>
+        <p>
+          That made reducing operational effort while making value visible the central design
+          problem, not a secondary feature.
+        </p>
       </div>
       <div class="insight">
         <h4>Budgets are planned retailer by retailer</h4>
@@ -112,20 +120,14 @@
         </p>
       </div>
     </div>
-    <p>
-      That made reducing operational effort while making value visible the central design
-      problem, not a secondary feature.
-    </p>
-
     <h3>The commercial opportunity</h3>
     <p>
       The goal was to shift CMax from a tool people used only when buying media through Criteo,
       to a platform brands and agencies choose to run more of their retail media business
-      through. A large majority of customers weren't buying CMax explicitly, which pointed to
-      real headroom.
+      through — planning and activation through to optimization and reporting. A large majority
+      of customers weren't buying CMax explicitly, which pointed to real headroom.
     </p>
     <div class="pull-quote">The takeaway wasn't "add more features." It was making CMax easier to adopt, easier to operate, and more valuable across the full retail media lifecycle.</div>
-    <p>That spanned planning and activation through optimization and reporting.</p>
   </section>
 
   <section class="wrap toc">
@@ -178,22 +180,29 @@
 
     <div class="section">
       <p class="section__label">Key decisions</p>
-      <div class="decision">
-        <h4>Consent first, linking second — even though it added a step</h4>
-        <p>The fastest path to "unified" would have surfaced connected campaigns as soon as a technical link existed. I pushed for a deliberate two-step sequence — consent, then linking — because campaign data appearing without a legible relationship would have undermined retailer trust in the whole model. The extra step was the trust mechanism, not friction.</p>
+      <div class="decision-grid">
+        <div class="decision">
+          <h4>Consent first, linking second — even though it added a step</h4>
+          <p>The fastest path to "unified" would have surfaced connected campaigns as soon as a technical link existed. I pushed for a deliberate two-step sequence — consent, then linking — because campaign data appearing without a legible relationship would have undermined retailer trust in the whole model. The extra step was the trust mechanism, not friction.</p>
+        </div>
+        <div class="decision">
+          <h4>Read-only as a product choice, not a limitation</h4>
+          <p>With uneven permissions across users, we could have hidden restricted campaigns entirely, or shown everything and let edit attempts fail. I argued for a third path: make the surface honestly read-only for everyone, with deep links out for users who already held edit access elsewhere. Visibility improved without overpromising control.</p>
+        </div>
+        <div class="decision">
+          <h4>Unified alongside, not blended in</h4>
+          <p>Once linked, external campaigns appear automatically in the main campaign view — visually distinguished, not merged in. Users get the benefit of one surface without losing track of what they're looking at or who bills for it.</p>
+        </div>
+        <div class="decision">
+          <h4>Treating terminology as information architecture</h4>
+          <p>The project accumulated overlapping names for concepts that weren't actually synonyms. I drove the separation and naming work myself — it wasn't a wording pass at the end, it was part of designing the system.</p>
+        </div>
       </div>
-      <div class="decision">
-        <h4>Read-only as a product choice, not a limitation</h4>
-        <p>With uneven permissions across users, we could have hidden restricted campaigns entirely, or shown everything and let edit attempts fail. I argued for a third path: make the surface honestly read-only for everyone, with deep links out for users who already held edit access elsewhere. Visibility improved without overpromising control.</p>
-      </div>
-      <div class="decision">
-        <h4>Unified alongside, not blended in</h4>
-        <p>Once linked, external campaigns appear automatically in the main campaign view — visually distinguished, not merged in. Users get the benefit of one surface without losing track of what they're looking at or who bills for it.</p>
-      </div>
-      <div class="decision">
-        <h4>Treating terminology as information architecture</h4>
-        <p>The project accumulated overlapping names for concepts that weren't actually synonyms. I drove the separation and naming work myself — it wasn't a wording pass at the end, it was part of designing the system.</p>
-      </div>
+    </div>
+
+    <div class="figure">
+      <img src="images/cmax-unified-vs-holistic.png" alt="Architecture diagram contrasting two concepts: a holistic view aggregating campaign data across a brand's network accounts, and a unified view linking a single network account to private market demand accounts across three retailers. Markers show which accounts a user does and doesn't have an access role on.">
+      <p class="figure__cap">Separating "holistic view" from "unified view": one aggregates a user's own accounts, the other links a network account to private market accounts. Mapping them this way also surfaced where each user's permissions did and didn't reach.</p>
     </div>
 
     <div class="figure">
@@ -267,44 +276,50 @@
         <li>The brand creates a retailer-funded campaign using the standard campaign flow.</li>
         <li>The campaign appears in unified reporting with new activation and budget-model dimensions.</li>
       </ol>
+      <div class="figure">
+        <img src="images/cmax-authorized-buyers-architecture.png" alt="Architecture diagram of retailer budgets and authorized buyers: a brand's network accounts on the Criteo demand side, with status markers showing which are authorized buyers, connected to three retailers' private markets on the supply side, each with its own campaign portal and balance dashboard.">
+        <p class="figure__cap">The same flow as an architecture map: which brand accounts a retailer has authorized, where campaigns and balances actually live, and what each side can see. Retailers differ — one hasn't enabled authorized buyers at all.</p>
+      </div>
     </div>
 
     <div class="section">
       <p class="section__label">Key decisions</p>
-      <div class="decision">
-        <h4>Tell the end-to-end story, not the permission story</h4>
-        <p>Authorized status is presented as the start of an activation workflow, not a destination. Otherwise approval reads as bureaucracy instead of capability.</p>
+      <div class="decision-grid">
+        <div class="decision">
+          <h4>Tell the end-to-end story, not the permission story</h4>
+          <p>Authorized status is presented as the start of an activation workflow, not a destination. Otherwise approval reads as bureaucracy instead of capability.</p>
+        </div>
+        <div class="decision">
+          <h4>Make retailer control visible without making brands feel blocked</h4>
+          <p>The brand side needed a mirror image of retailer control: clear visibility of what access exists, and predictable, explained states when something isn't permitted — rather than options that silently fail.</p>
+        </div>
+        <div class="decision">
+          <h4>Use permissions to filter downstream choices</h4>
+          <p>The retailers, balances, and campaign types shown during activation reflect the user's actual authorization state. Users never choose an option their account can't complete — the single biggest source of setup errors in permission-gated flows.</p>
+        </div>
+        <div class="decision">
+          <h4>Design for the manual launch and the self-serve future at once</h4>
+          <p>Launch had internal teams handling setup manually, with brands self-serving campaign creation. I shaped the terminology and structure so a future self-service model builds on the same mental model — phased rollout without a migration.</p>
+        </div>
       </div>
-      <div class="decision">
-        <h4>Make retailer control visible without making brands feel blocked</h4>
-        <p>The brand side needed a mirror image of retailer control: clear visibility of what access exists, and predictable, explained states when something isn't permitted — rather than options that silently fail.</p>
-      </div>
-      <div class="decision">
-        <h4>Use permissions to filter downstream choices</h4>
-        <p>The retailers, balances, and campaign types shown during activation reflect the user's actual authorization state. Users never choose an option their account can't complete — the single biggest source of setup errors in permission-gated flows.</p>
-      </div>
-      <div class="decision">
-        <h4>Design for the manual launch and the self-serve future at once</h4>
-        <p>Launch had internal teams handling setup manually, with brands self-serving campaign creation. I shaped the terminology and structure so a future self-service model builds on the same mental model — phased rollout without a migration.</p>
-      </div>
-    </div>
 
-    <div class="figure-grid">
-      <div class="figure">
-        <img src="images/cmax-authorized-buyers-add.png" alt="Add Authorized Buyers dialog, step 1 of 2: the retailer pastes in up to 100 Commerce Max account IDs to authorize.">
-        <p class="figure__cap">1. The retailer adds brand accounts as Authorized Buyers, by account ID.</p>
-      </div>
-      <div class="figure">
-        <img src="images/cmax-campaign-profiles.png" alt="Campaign profiles settings on the retailer side: for Authorized Buyers, Onsite Sponsored Products and Onsite Display are enabled with specific buy types allowed or blocked.">
-        <p class="figure__cap">2. The retailer sets which campaign and buy types its Authorized Buyers can use.</p>
-      </div>
-      <div class="figure">
-        <img src="images/cmax-retailer-budget-access.png" alt="Retailer Budget access page on the brand side, listing the retailers that have approved the account and when.">
-        <p class="figure__cap">3. The brand sees which retailers have approved it for Retailer Budget campaigns.</p>
-      </div>
-      <div class="figure">
-        <img src="images/cmax-retailer-budget-create.png" alt="Create campaign: a choice between Criteo Budget and Retailer Budget, with Retailer Budget selected and a retailer dropdown below it.">
-        <p class="figure__cap">4. Retailer Budget becomes a funding choice when creating a campaign, limited to approved retailers.</p>
+      <div class="figure-grid">
+        <div class="figure">
+          <img src="images/cmax-authorized-buyers-add.png" alt="Add Authorized Buyers dialog, step 1 of 2: the retailer pastes in up to 100 Commerce Max account IDs to authorize.">
+          <p class="figure__cap">1. The retailer adds brand accounts as Authorized Buyers, by account ID.</p>
+        </div>
+        <div class="figure">
+          <img src="images/cmax-campaign-profiles.png" alt="Campaign profiles settings on the retailer side: for Authorized Buyers, Onsite Sponsored Products and Onsite Display are enabled with specific buy types allowed or blocked.">
+          <p class="figure__cap">2. The retailer sets which campaign and buy types its Authorized Buyers can use.</p>
+        </div>
+        <div class="figure">
+          <img src="images/cmax-retailer-budget-access.png" alt="Retailer Budget access page on the brand side, listing the retailers that have approved the account and when.">
+          <p class="figure__cap">3. The brand sees which retailers have approved it for Retailer Budget campaigns.</p>
+        </div>
+        <div class="figure">
+          <img src="images/cmax-retailer-budget-create.png" alt="Create campaign: a choice between Criteo Budget and Retailer Budget, with Retailer Budget selected and a retailer dropdown below it.">
+          <p class="figure__cap">4. Retailer Budget becomes a funding choice when creating a campaign, limited to approved retailers.</p>
+        </div>
       </div>
     </div>
 
@@ -351,21 +366,23 @@
 
     <div class="section">
       <p class="section__label">Key decisions</p>
-      <div class="decision">
-        <h4>Preserve the execution environment; add the visibility layer</h4>
-        <p>Partner campaigns stayed editable in the partner's own environment. Our product provided visibility, aggregation, and a clear entry point into the relevant workflow. This is what made participation possible at all — the alternative was no adoption.</p>
-      </div>
-      <div class="decision">
-        <h4>Account selection as the moment of commitment</h4>
-        <p>When a user starts campaign creation, an account selector makes the execution destination explicit — our platform for native campaigns, or the linked partner account for partner-specific ones. The fork is a conscious choice, not a surprise three screens later.</p>
-      </div>
-      <div class="decision">
-        <h4>Same-tab transitions with a guaranteed way home</h4>
-        <p>Handing off to the partner's workflow in the same browser tab preserved continuity and avoided window sprawl; a persistent "back" affordance made the return path predictable. Small mechanics, but they carry the entire feeling of one coherent journey.</p>
-      </div>
-      <div class="decision">
-        <h4>Interoperable, not artificially identical</h4>
-        <p>The design deliberately avoided pretending the two products were one. Partner-specific branding signals the context switch. When products have different responsibilities and permissions, a legible boundary is more trustworthy than a cosmetic merge.</p>
+      <div class="decision-grid">
+        <div class="decision">
+          <h4>Preserve the execution environment; add the visibility layer</h4>
+          <p>Partner campaigns stayed editable in the partner's own environment. Our product provided visibility, aggregation, and a clear entry point into the relevant workflow. This is what made participation possible at all — the alternative was no adoption.</p>
+        </div>
+        <div class="decision">
+          <h4>Account selection as the moment of commitment</h4>
+          <p>When a user starts campaign creation, an account selector makes the execution destination explicit — our platform for native campaigns, or the linked partner account for partner-specific ones. The fork is a conscious choice, not a surprise three screens later.</p>
+        </div>
+        <div class="decision">
+          <h4>Same-tab transitions with a guaranteed way home</h4>
+          <p>Handing off to the partner's workflow in the same browser tab preserved continuity and avoided window sprawl; a persistent "back" affordance made the return path predictable. Small mechanics, but they carry the entire feeling of one coherent journey.</p>
+        </div>
+        <div class="decision">
+          <h4>Interoperable, not artificially identical</h4>
+          <p>The design deliberately avoided pretending the two products were one. Partner-specific branding signals the context switch. When products have different responsibilities and permissions, a legible boundary is more trustworthy than a cosmetic merge.</p>
+        </div>
       </div>
     </div>
 
