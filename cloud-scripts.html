@@ -130,6 +130,16 @@
       <img src="images/cloud-scripts-concept-wireframe.png" alt="Early conceptual wireframes mapping the admin and agent flows for the script distribution and editing tool, with design annotations.">
       <p class="figure__cap">Early conceptual wireframes mapping the admin (script creator) and agent (end user) flows.</p>
     </div>
+    <div class="figure-grid">
+      <div class="figure">
+        <img src="images/cloud-scripts-editor-blank.png" alt="The shipped Script Editor on a new script: an empty dotted canvas with a Triggers block and a New step block, zoom controls, and a toolbar with an error count, Save and Test.">
+        <p class="figure__cap">The shipped editor on a new script. An empty canvas, one trigger, one step.</p>
+      </div>
+      <div class="figure">
+        <img src="images/cloud-scripts-editor-editing.png" alt="The same editor with a built script: a vertical chain of Dialog, Send Terminal Command and Form blocks with nested form fields, and a side panel editing the selected Dialog step's title, content and button text.">
+        <p class="figure__cap">In use, every step is its own block, edited in a side panel rather than inline.</p>
+      </div>
+    </div>
   </section>
 
   <section class="wrap section">
@@ -163,8 +173,8 @@
       like it had existed before.
     </p>
     <div class="figure">
-      <img src="images/cloud-scripts-admin-settings.png" alt="The admin settings panel listing scripts with triggers, favorites, error counts, and edit/download/delete actions.">
-      <p class="figure__cap">The advanced settings area for admin-level script management.</p>
+      <img src="images/cloud-scripts-script-settings.png" alt="The Settings dialog open on Cloud Scripts: a table of scripts with trigger, favourite and error columns, per-row edit, download and delete actions, and New Script, Import, Export and Delete along the top.">
+      <p class="figure__cap">The advanced settings area for admin-level script management, with import and export for sharing.</p>
     </div>
   </section>
 
@@ -181,6 +191,10 @@
     <div class="figure">
       <img src="images/cloud-scripts-design-system.png" alt="Design system documentation for the script editor: step block states, colors, drag targets and zoom controls.">
       <p class="figure__cap">Step block states, colors, and drag-and-drop behavior, documented for the shared design system.</p>
+    </div>
+    <div class="figure">
+      <img src="images/cloud-scripts-step-blocks.png" alt="A close view of the editor canvas: Dialog, Send Terminal Command and Form step blocks in their shipped styling, each with a drag affordance and overflow menu, connected by add-step buttons.">
+      <p class="figure__cap">Those same components in place on the canvas, all pulled from the shared library.</p>
     </div>
   </section>
 
@@ -200,6 +214,13 @@
       afterthought, which meant the team could keep building without re-litigating every UI
       decision.
     </p>
+    <div class="figure">
+      <video controls preload="metadata" poster="images/cloud-scripts-editor-editing.png">
+        <source src="images/cloud-scripts-demo.mp4" type="video/mp4">
+        Your browser can't play this video.
+      </video>
+      <p class="figure__cap">Building a script end to end, from empty canvas to finished flow. About a minute and a half.</p>
+    </div>
   </section>
 
   <section class="wrap section">

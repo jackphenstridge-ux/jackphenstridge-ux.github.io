@@ -598,6 +598,15 @@ code { font-family: var(--mono); font-size: 0.85em; }
 .section ul, .section ol { padding-left: 1.1rem; margin: 0 0 1.15rem; }
 .section li { margin-bottom: 0.5rem; }
 
+/* CMax nests .section inside each sub-study. Those don't want the rule and
+   full padding of a top-level section — it put 13 extra hairlines on the page. */
+.study .section { border-top: 0; padding-block: clamp(1.25rem, 3vh, 2rem); }
+
+/* A figure or quote ending a section adds its margin on top of the section's
+   padding, leaving up to 6.5rem before the next rule. */
+.section > :last-child,
+.study > :last-child { margin-bottom: 0; }
+
 .decision {
   background: var(--surface);
   border-radius: 3px;
