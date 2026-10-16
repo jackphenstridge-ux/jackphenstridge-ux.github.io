@@ -416,6 +416,45 @@ code { font-family: var(--mono); font-size: 0.85em; }
 .contact a { color: var(--ink); }
 .contact__label { color: var(--muted); font-size: 0.8125rem; }
 
+/* Contact page — one block: heading, a line of copy, and the four
+   links stacked with hairlines between them. */
+.contact-page {
+  padding-block: clamp(3rem, 10vh, 6rem) clamp(3rem, 9vh, 6rem);
+}
+.contact-page h1 {
+  font-size: clamp(1.75rem, 4vw, 2.5rem);
+  line-height: 1.25;
+  letter-spacing: -0.015em;
+  font-weight: 400;
+  margin: 0 0 1rem;
+}
+.contact-page__sub {
+  max-width: var(--measure);
+  color: var(--muted);
+  margin: 0 0 2.5rem;
+}
+
+.contact-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  max-width: var(--measure);
+  border-top: 1px solid var(--rule);
+}
+.contact-list li { border-bottom: 1px solid var(--rule); }
+.contact-list a {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.25rem 1.5rem;
+  padding: 1.1rem 0;
+  color: var(--ink);
+  text-decoration: none;
+}
+.contact-list a:hover { color: var(--accent); }
+.contact-list__note { color: var(--muted); font-size: 0.875rem; }
+
 /* ---------------------------------------------------------------
    7. CASE STUDY — HEADER
    Two-column: project name/eyebrow on the left, headline+sub on the
